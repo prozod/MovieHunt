@@ -1,0 +1,25 @@
+{
+  "name": "moviehunt",
+  "version": "1.0.0",
+  "main": "./src/index.html",
+  "scripts": {
+    "start": "snowpack dev",
+    "build": "snowpack build"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@snowpack/plugin-postcss": "^1.2.2",
+    "autoprefixer": "^10.2.5",
+    "postcss": "^8.2.14",
+    "tailwindcss": "^2.1.2"
+  },
+  "dependencies": {
+    "dotenv": "^9.0.2",
+    "express": "^4.17.1",
+    "material-design-icons": "^3.0.1",
+    "snowpack": "^3.4.0"
+  },
+  "description": ""
+}

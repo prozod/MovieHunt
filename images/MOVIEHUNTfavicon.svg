@@ -1,0 +1,14 @@
+<svg width="77" height="77" viewBox="0 0 77 77" fill="none" xmlns="http://www.w3.org/2000/svg">
+<mask id="mask0" mask-type="alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="77" height="77">
+<circle cx="38.5" cy="38.5" r="38.5" fill="white"/>
+</mask>
+<g mask="url(#mask0)">
+<circle cx="38.5" cy="38.5" r="38.5" fill="#5578F3"/>
+<g style="mix-blend-mode:screen">
+<circle cx="56.5" cy="38.5" r="38.5" fill="#113C5A"/>
+</g>
+<g style="mix-blend-mode:overlay">
+<path d="M115 38.5C115 59.763 97.763 77 76.5 77C55.237 77 38 59.763 38 38.5C38 17.237 55.237 0 76.5 0C97.763 0 115 17.237 115 38.5Z" fill="#7393AA"/>
+</g>
+</g>
+</svg>
