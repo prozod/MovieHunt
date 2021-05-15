@@ -6,6 +6,39 @@ const browsedContainer = document.querySelector(".browsingList");
 const apiKey = "1f4df7f17529b542876a985507f244b0";
 const IMAGE_URL = "https://image.tmdb.org/t/p/w500";
 
+searchForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  let movieQuery = searchInput.value;
+  let page = 1;
+
+  try {
+    const res = await fetch(
+      `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&language=en-US&query=${movieQuery}&page=${page}`
+    );
+
+    const data = await res.json();
+
+    if (!res.ok) throw new Error(`${data.message} ${res.status}`);
+    const movies = data.results;
+    browsedContainer.innerHTML = "";
+    movieContainer(movies);
+  } catch (error) {
+    console.error(error.message);
+  }
+});
+
+async function getGenre() {
+  try {
+    let response = await fetch(
+      `https://api.themoviedb.org/3/genre/movie/list?api_key=${apiKey}&language=en-US`
+    );
+    let data = await response.json();
+    return data.genres;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 function movieContainer(movies) {
   const html = `
   ${movies
@@ -62,7 +95,7 @@ function movieContainer(movies) {
       <p class="font-bold text-purple-900">
         Genre:
         <span class="font-medium text-purple-600"
-          >${movieGenre(movie.genre_ids.forEach((id) => console.log(id)))}</span
+          >${"dummytext"}</span
         >
       </p>
       <p class="font-bold text-purple-900 flex flex-row ">
@@ -88,49 +121,15 @@ function movieContainer(movies) {
   searchInput.value.textContent = "";
 }
 
-searchForm.addEventListener("submit", async (e) => {
-  e.preventDefault();
-  let movieQuery = searchInput.value;
-  let page = 1;
-
-  try {
-    const res = await fetch(
-      `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&language=en-US&query=${movieQuery}&page=${page}`
-    );
-
-    const data = await res.json();
-
-    if (!res.ok) throw new Error(`${data.message} ${res.status}`);
-    const movies = data.results;
-    browsedContainer.innerHTML = "";
-
-    movieContainer(movies);
-
-    console.log(data.results);
-  } catch (error) {
-    console.error(error.message);
-  }
-});
-
-async function movieGenre() {
-  try {
-    const res = await fetch(
-      `https://api.themoviedb.org/3/genre/movie/list?api_key=${apiKey}&language=en-US`
-    );
-
-    const data = await res.json();
-    const genre = data.genres.map((genre) => Object.values(genre));
-
-    for (let i = 0; i < arguments.length; i++) {
-      genre.forEach((genre) => {
-        if (genre[0] === arguments[i]) {
-          console.log(genre[1]);
-          return genre[1];
-        }
-      });
-    }
-  } catch (error) {
-    console.error("MOVIE ID CALLBACK REQ FAILED", error.message);
-  }
+async function getShows() {
+  let response = await fetch(
+    `https://api.themoviedb.org/3/tv/popular?api_key=${apiKey}&language=en-US&page=1`
+  );
+  let data = await response.json();
+  console.log(data.results);
+  return data.results;
 }
-// movieGenre(80, 18, 9648, 53);
+
+getShows();
+
+// https://api.themoviedb.org/3/genre/movie/list?api_key=${apiKey}&language=en-US
