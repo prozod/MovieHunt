@@ -4,7 +4,7 @@
 /** @type {import("snowpack").SnowpackUserConfig } */
 module.exports = {
   mount: {},
-  plugins: ["@snowpack/plugin-postcss"],
+  plugins: ["@snowpack/plugin-postcss", "@snowpack/plugin-dotenv"],
   packageOptions: {
     /* ... */
   },
