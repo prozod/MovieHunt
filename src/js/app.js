@@ -155,6 +155,14 @@ searchForm.addEventListener("submit", (e) => {
   let searchQuery = searchInput.value;
 
   fetchMovies(searchQuery, 1).then((data) => {
+    console.log(data.results);
+    if (data.results.length == 0) {
+      browsedContainer.innerHTML = "";
+      paginationContainer.innerHTML = "";
+      paginationContainer.innerHTML = `<h1 class="text-purple-900 font-bold text-xl">Could not find any movie called "${searchQuery}"</h1>. 
+      `;
+      return;
+    }
     const half = Math.ceil(data.results.length / 2);
     const halfOne = data.results.slice(0, half);
     console.log(halfOne);
