@@ -13,7 +13,31 @@ module.exports = {
     },
   },
   variants: {
-    extend: {},
+    extend: {
+      textColor: [
+        "responsive",
+        "hover",
+        "focus",
+        "before",
+        "after",
+        "hover::before",
+        "hover::after",
+        "focus::before",
+        "checked:hover",
+        "checked:hover::before",
+      ],
+    },
   },
-  plugins: [],
+  plugins: [
+    require("tailwindcss-pseudo-elements")({
+      customPseudoClasses: ["foo"],
+      customPseudoElements: ["bar"],
+      contentUtilities: false,
+      emptyContent: false,
+      classNameReplacer: {
+        "hover:before:text-black": "hbt",
+      },
+    }),
+    require("@tailwindcss/line-clamp"),
+  ],
 };

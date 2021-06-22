@@ -4,7 +4,8 @@
   "main": "./src/index.html",
   "scripts": {
     "start": "snowpack dev",
-    "build": "snowpack build"
+    "build": "snowpack build",
+    "build:css": "postcss src/css/tailwind.css -o src/css/style.css"
   },
   "keywords": [],
   "author": "",
@@ -17,10 +18,13 @@
     "tailwindcss": "^2.1.2"
   },
   "dependencies": {
+    "@tailwindcss/line-clamp": "^0.2.1",
     "dotenv": "^9.0.2",
     "express": "^4.17.1",
     "material-design-icons": "^3.0.1",
-    "snowpack": "^3.4.0"
+    "postcss-cli": "^8.3.1",
+    "snowpack": "^3.4.0",
+    "tailwindcss-pseudo-elements": "^2.0.0"
   },
   "description": ""
 }
