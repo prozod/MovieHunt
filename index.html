@@ -15,6 +15,7 @@
     />
     <link rel="stylesheet" href="/css/style.css" />
     <script src="/js/app.js" defer></script>
+    <script src="/js/highlights.js" defer></script>
 
     <title>MovieHunt | Vanilla JS</title>
   </head>
@@ -25,6 +26,7 @@
       to-purple-100
       bg-opacity-60
       flex flex-col
+      font-inter
     "
   >
     <!-- LOGO + NAVBAR -->
@@ -42,22 +44,41 @@
       class="w-auto mt-5 flex justify-center font-inter space-x-10"
       id="navbar"
     >
-      <a href="/popular" class="font-bold text-gray-900 hover:text-indigo-600"
+      <a
+        href="/popular"
+        class="font-bold text-gray-900 hover:text-indigo-600"
+        id="popular"
         >Popular</a
       >
-      <a href="/upcoming" class="font-bold text-gray-900 hover:text-indigo-600"
+      <a
+        href="/upcoming"
+        class="font-bold text-gray-900 hover:text-indigo-600"
+        id="upcoming"
         >Upcoming</a
       >
-      <a href="/toprated" class="font-bold text-gray-900 hover:text-indigo-600"
+      <a
+        href="/toprated"
+        class="font-bold text-gray-900 hover:text-indigo-600"
+        id="toprated"
         >Top Rated</a
       >
     </div>
     <!-- CONTENT -->
-    <div class="flex flex-col justify-center xl:flex-row-reverse">
+    <div
+      class="
+        flex flex-col
+        w-10/12
+        justify-center
+        m-auto
+        xl:flex-row-reverse
+        font-inter
+        mx-auto
+      "
+    >
       <!-- BROWSING LIST -->
       <div
         class="
-          w-auto
+          w-full
           h-auto
           max-w-6xl
           py-5
@@ -78,6 +99,7 @@
             w-auto
             max-w-5xl
             h-10
+            font-inter
           "
         >
           <span
@@ -103,11 +125,11 @@
               flex-1
               placeholder-purple-400
               text-purple-500
-              font-semibold
+              font-medium font-inter
             "
             type="search"
             name="search"
-            placeholder="Search..."
+            placeholder="What are you looking for?"
           />
           <input
             type="submit"
@@ -121,7 +143,7 @@
               border-purple-400
               font-inter
               text-purple-500
-              font-semibold
+              font-medium
               cursor-pointer
               hover:text-purple-700
             "
@@ -332,7 +354,17 @@
         </div>
         --></div>
         <div
-          class="paginationBtn flex items-center justify-center w-50 mt-8 mb-5"
+          class="
+            paginationBtn
+            flex
+            items-center
+            justify-start
+            md:justify-center
+            w-50
+            mt-8
+            md:mb-5
+            flex-wrap
+          "
         ></div>
       </div>
 
@@ -343,11 +375,10 @@
           flex flex-col
           justify-center
           max-w-6xl
-          px-5
+          mx-0
           xl:w-full
           xl:max-w-md
           xl:h-3/4
-          w-auto
           items-start
           sticky
           top-2
@@ -356,7 +387,7 @@
         <div
           id="trending"
           class="
-            w-screen
+            w-full
             h-auto
             max-w-5xl
             bg-indigo-300
@@ -370,6 +401,7 @@
             py-2
             pb-5
             shadow-sm
+            m-auto
             xl:w-full
             xl:max-w-sm
             xl:justify-start

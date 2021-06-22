@@ -134,19 +134,19 @@ const createPagination = (pages) => {
   console.log(state.current_page);
   console.log(maxLeft, maxRight);
   for (let page = maxLeft; page <= maxRight; page++) {
-    paginationContainer.innerHTML += `<button value=${page} class="mx-5 p-2 px-4  text-purple-900  bg-indigo-300 rounded-md font-bold active:bg-indigo-200 focus:outline-none"> ${page}</button>`;
+    paginationContainer.innerHTML += `<button value=${page} class="mx-2 p-2 px-4 my-2  text-purple-900  bg-indigo-300 rounded-md font-bold active:bg-indigo-200 focus:outline-none"> ${page}</button>`;
   }
 
   if (state.current_page != 1) {
     paginationContainer.innerHTML =
-      `<button value=${1} class="bg-indigo-300 text-purple-900   px-5 py-2 mx-2 rounded-md font-bold active:bg-indigo-200 focus:outline-none">First</button>` +
+      `<button value=${1} class="bg-indigo-300 text-purple-900   px-5 py-2 my-2 mx-1 rounded-md font-bold active:bg-indigo-200 focus:outline-none">First</button>` +
       paginationContainer.innerHTML;
   }
 
   if (state.current_page != pages) {
     paginationContainer.innerHTML =
       paginationContainer.innerHTML +
-      `<button value=${pages} class="bg-indigo-300 text-purple-900  px-5 py-2 mx-2 rounded-md font-bold active:bg-indigo-200 focus:outline-none">Last</button>`;
+      `<button value=${pages} class="bg-indigo-300 text-purple-900  px-5 py-2 my-2 mx-1 rounded-md font-bold active:bg-indigo-200 focus:outline-none">Last</button>`;
   }
 };
 
@@ -154,15 +154,23 @@ searchForm.addEventListener("submit", (e) => {
   e.preventDefault();
   let searchQuery = searchInput.value;
 
+  if (searchQuery === "") {
+    browsedContainer.innerHTML = "";
+    paginationContainer.innerHTML = "";
+    paginationContainer.innerHTML = `<h1 class="text-purple-900 font-bold text-xl">Search field is empty. Please type a movie name.</h1> 
+    `;
+    return;
+  }
+
   fetchMovies(searchQuery, 1).then((data) => {
-    console.log(data.results);
-    if (data.results.length == 0) {
+    if (data.results.length === 0) {
       browsedContainer.innerHTML = "";
       paginationContainer.innerHTML = "";
-      paginationContainer.innerHTML = `<h1 class="text-purple-900 font-bold text-xl">Could not find any movie called "${searchQuery}"</h1>. 
+      paginationContainer.innerHTML = `<h1 class="text-purple-900 font-bold text-xl">Could not find any movie called "${searchQuery}".</h1> 
       `;
       return;
     }
+
     const half = Math.ceil(data.results.length / 2);
     const halfOne = data.results.slice(0, half);
     console.log(halfOne);

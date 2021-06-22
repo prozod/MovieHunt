@@ -17,6 +17,7 @@
     <title>Popular | MovieHunt</title>
     <link rel="stylesheet" href="/css/style.css" />
     <script src="/js/popularMovies.js" defer></script>
+    <script src="/js/highlights.js" defer></script>
   </head>
   <body
     class="
@@ -47,31 +48,37 @@
       class="w-auto mt-5 flex justify-center font-inter space-x-10"
       id="navbar"
     >
-      <a href="/popular" class="font-bold text-gray-900 hover:text-indigo-600"
+      <a
+        href="/popular"
+        class="font-bold text-gray-900 hover:text-indigo-600"
+        id="popular"
         >Popular</a
       >
-      <a href="/upcoming" class="font-bold text-gray-900 hover:text-indigo-600"
+      <a
+        href="/upcoming"
+        class="font-bold text-gray-900 hover:text-indigo-600"
+        id="upcoming"
         >Upcoming</a
       >
-      <a href="/toprated" class="font-bold text-gray-900 hover:text-indigo-600"
+      <a
+        href="/toprated"
+        class="font-bold text-gray-900 hover:text-indigo-600"
+        id="toprated"
         >Top Rated</a
       >
     </div>
 
     <!-- CONTENT -->
-    <div class="flex relative items-center justify-center mt-3">
-      <h1
+    <div class="flex relative items-center justify-center mt-8">
+      <div
         class="
           absolute
-          text-2xl
-          font-bold
-          text-gray-900
-          p-3
-          pl-0
           flex
           justify-start
           z-100
+          mt-5
           inset-0
+          flex-col
           m-auto
           w-10/12
           sm:w-10/12
@@ -79,9 +86,42 @@
           lg:w-8/12
         "
       >
-        MOST POPULAR MOVIES OF TODAY
-      </h1>
-
+        <h1
+          class="
+            absolute
+            text-xl
+            md:text-1xl
+            lg:text-2xl
+            font-bold
+            text-gray-900
+            flex
+            justify-start
+            z-40
+            inset-0
+            m-auto
+          "
+        >
+          <div class="w-1 h-12 bg-indigo-600 mr-2 items-center"></div>
+          MOST POPULAR
+        </h1>
+        <p
+          class="
+            absolute
+            text-lg
+            font-light
+            text-gray-900
+            mt-6
+            ml-3
+            flex
+            justify-start
+            z-40
+            inset-0
+            m-auto
+          "
+        >
+          Updated daily, just to keep you in the loop.
+        </p>
+      </div>
       <div
         class="
           relative
@@ -97,8 +137,8 @@
           sm:grid-cols-2
           md:grid-cols-3
           lg:grid-cols-4
-          lg:mt-16
-          sm:mt-16
+          lg:mt-24
+          sm:mt-20
         "
       >
         <!-- <div
