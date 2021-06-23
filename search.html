@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="shortcut icon"
+      href="/images/MOVIEHUNTfavicon.svg"
+      type="image/x-icon"
+    />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/style.css" />
+    <script type="module" src="/js/app.js" defer></script>
+    <script src="/js/highlights.js" defer></script>
+
+    <title>MovieHunt | Vanilla JS</title>
+  </head>
+  <body
+    class="
+      bg-gradient-to-r
+      from-indigo-200
+      to-purple-100
+      bg-opacity-60
+      flex flex-col
+      font-inter
+    "
+  >
+    <!-- LOGO + NAVBAR -->
+    <div class="flex justify-center">
+      <!-- <h1
+        class="text-3xl font-black text-purple-600 font-inter py-10 tracking-widest antialiased"
+      >
+        MOVIEHUNT
+      </h1> -->
+      <a href="/"
+        ><img src="/images/logo.svg" alt="MovieHunt Logo" class="mt-5 w-96"
+      /></a>
+    </div>
+    <div
+      class="w-auto mt-5 flex justify-center font-inter space-x-10"
+      id="navbar"
+    >
+    <a
+        href="/search"
+        class="font-bold text-gray-900 hover:text-indigo-600"
+        id="search"
+        >Search</a
+      >
+      <a
+        href="/popular"
+        class="font-bold text-gray-900 hover:text-indigo-600"
+        id="popular"
+        >Popular</a
+      >
+      <a
+        href="/upcoming"
+        class="font-bold text-gray-900 hover:text-indigo-600"
+        id="upcoming"
+        >Upcoming</a
+      >
+     
+    </div>
+    <!-- CONTENT -->
+    <div
+      class="
+        flex flex-col
+        w-10/12
+        justify-center
+        m-auto
+        xl:flex-row-reverse
+        font-inter
+        mx-auto
+      "
+    >
+      <!-- BROWSING LIST -->
+      <div
+        class="
+          w-full
+          h-auto
+          max-w-6xl
+          py-5
+          rounded-lg
+          flex-col flex-auto
+          justify-center
+        "
+        id="content"
+      >
+        <form
+          action="#"
+          class="
+            flex flex-1
+            items-center
+            justify-center
+            mt-5
+            mb-3
+            w-auto
+            max-w-5xl
+            h-10
+            font-inter
+          "
+        >
+          <span
+            class="
+              material-icons
+              p-2
+              border-l-2 border-r-0 border-t-2 border-b-2
+              rounded-l-md
+              border-purple-400
+              text-purple-500
+              cursor-default
+            "
+            >search</span
+          >
+
+          <input
+            class="
+              searchbox
+              bg-transparent
+              p-2
+              border-2 border-purple-400
+              w-6/12
+              flex-1
+              placeholder-purple-400
+              text-purple-500
+              font-medium font-inter
+            "
+            type="search"
+            name="search"
+            placeholder="What are you looking for?"
+          />
+          <input
+            type="submit"
+            value="Search"
+            class="
+              searchButton
+              bg-transparent
+              p-2
+              border-l-0 border-r-2 border-t-2 border-b-2
+              rounded-r-md
+              border-purple-400
+              font-inter
+              text-purple-500
+              font-medium
+              cursor-pointer
+              hover:text-purple-700
+            "
+          />
+        </form>
+        <div class="browsingList flex flex-col justify-center">
+          <!-- 
+        <div
+          class="
+            rounded-md
+            m-2
+            w-auto
+            max-w-5xl
+            h-auto
+            bg-purple-400 bg-opacity-20
+            z-50
+            flex
+            items-center
+            flex-col
+            shadow-sm
+            md:flex-row
+          "
+        >
+          <img
+            src="./images/mortalkombat.jpg"
+            alt=""
+            class="w-48 h-auto rounded-md mt-5 md:mt-0"
+          />
+          <div class="movie__info flex flex-col h-auto m-5">
+            <h2
+              class="
+                text-purple-900
+                font-black font-inter
+                text-xl
+                mb-2
+                hover:text-purple-700
+                cursor-pointer
+              "
+            >
+              Mortal Kombat (2021)
+            </h2>
+            <p class="font-bold text-purple-900">
+              Release date:
+              <span class="font-medium text-purple-600">04/23/2021 (US)</span>
+            </p>
+            <p class="font-bold text-purple-900">
+              Genre:
+              <span class="font-medium text-purple-600"
+                >Action, Fantasy, Adventure, Science Fiction</span
+              >
+            </p>
+            <p class="font-bold text-purple-900">
+              Play time:
+              <span class="font-medium text-purple-600"> 1h 50m</span>
+            </p>
+            <p class="font-bold text-purple-900">
+              Overview:
+              <span class="font-medium text-purple-600"
+                >Washed-up MMA fighter Cole Young, unaware of his heritage, and
+                hunted by Emperor Shang Tsung's best warrior, Sub-Zero, seeks
+                out and trains with Earth's greatest champions as he prepares to
+                stand against the enemies of Outworld in a high stakes battle
+                for the universe.</span
+              >
+            </p>
+          </div>
+        </div>
+
+        <div
+          class="
+            rounded-md
+            m-2
+            max-w-screen-lg
+            h-auto
+            bg-purple-400 bg-opacity-20
+            z-50
+            flex
+            items-center
+            flex-col flex-auto
+            shadow-sm
+            md:flex-row
+          "
+        >
+          <img
+            src="./images/miracoulousshanghai.jpg"
+            alt=""
+            class="w-48 h-auto bg-indigo-700 rounded-md mt-5 md:mt-0"
+          />
+          <div class="movie__info flex flex-col h-auto m-5">
+            <h2
+              class="
+                text-purple-900
+                font-black font-inter
+                text-xl
+                mb-2
+                hover:text-purple-700
+                cursor-pointer
+              "
+            >
+              Miraculous World: Shanghai – The Legend of Ladydragon (2021)
+            </h2>
+            <p class="font-bold text-purple-900">
+              Release date:
+              <span class="font-medium text-purple-600">04/04/2021 (FR) </span>
+            </p>
+            <p class="font-bold text-purple-900">
+              Genre:
+              <span class="font-medium text-purple-600"
+                >Animation, Comedy, Family, Adventure
+              </span>
+            </p>
+            <p class="font-bold text-purple-900">
+              Play time:
+              <span class="font-medium text-purple-600"> 52m</span>
+            </p>
+            <p class="font-bold text-purple-900">
+              Overview:
+              <span class="font-medium text-purple-600"
+                >To join Adrien in Shanghai, Marinette is going to visit her
+                uncle Wang who is celebrating his anniversary. But, as soon as
+                she arrives in China, her purse gets stolen with Tikki inside,
+                whom she needs to secretly transform into Ladybug! Without money
+                and alone in the immense city, Marinette accepts the help of a
+                young and resourceful girl, Fei. The two girls will ally and
+                discover the existence of a new magical jewel, the Prodigious.
+                Hawk Moth, also present in Shanghai, seeks to finding it since a
+                long time...</span
+              >
+            </p>
+          </div>
+        </div>
+
+        <div
+          class="
+            rounded-md
+            m-2
+            max-w-screen-lg
+            h-auto
+            bg-purple-400 bg-opacity-20
+            z-50
+            flex
+            items-center
+            flex-col flex-auto
+            shadow-sm
+            md:flex-row
+          "
+        >
+          <img
+            src="./images/badtrip.jpg"
+            alt=""
+            class="w-48 h-auto bg-indigo-700 rounded-md mt-5 md:mt-0"
+          />
+          <div class="movie__info flex flex-col h-auto m-5">
+            <h2
+              class="
+                text-purple-900
+                font-black font-inter
+                text-xl
+                mb-2
+                hover:text-purple-700
+                cursor-pointer
+              "
+            >
+              Bad Trip (2021)
+            </h2>
+            <p class="font-bold text-purple-900">
+              Release date:
+              <span class="font-medium text-purple-600">03/26/2021 (AU) </span>
+            </p>
+            <p class="font-bold text-purple-900">
+              Genre:
+              <span class="font-medium text-purple-600">Comedy </span>
+            </p>
+            <p class="font-bold text-purple-900">
+              Play time:
+              <span class="font-medium text-purple-600">1h 27m </span>
+            </p>
+            <p class="font-bold text-purple-900">
+              Overview:
+              <span class="font-medium text-purple-600"
+                >Two pals embark on a road trip full of funny pranks that pull
+                real people into mayhem.</span
+              >
+            </p>
+          </div>
+        </div>
+
+        <div
+          class="
+            flex
+            m-5
+            max-w-screen-lg
+            h-auto
+            bg-purple-400 bg-opacity-20
+            z-50
+            items-center
+            flex-col flex-auto
+            rounded-md
+          "
+        >
+          <div class="flex space-x-10 font-bold text-purple-600 p-2 px-5">
+            <p class="cursor-pointer hover:text-purple-500">1</p>
+            <p class="cursor-pointer hover:text-purple-500">2</p>
+            <p class="cursor-pointer hover:text-purple-500">3</p>
+            <p class="cursor-pointer hover:text-purple-500">4</p>
+            <p class="cursor-pointer hover:text-purple-500">5</p>
+          </div>
+        </div>
+        --></div>
+        <div
+          class="
+            paginationBtn
+            flex
+            items-center
+            justify-start
+            md:justify-center
+            w-50
+            mt-8
+            md:mb-5
+            flex-wrap
+          "
+        ></div>
+      </div>
+
+      <!-- TRENDING -->
+      <div
+        class="
+          trendingContainer
+          flex flex-col
+          justify-center
+          max-w-6xl
+          mx-0
+          xl:w-full
+          xl:max-w-md
+          xl:h-3/4
+          items-start
+          sticky
+          top-2
+        "
+      >
+        <div
+          id="trending"
+          class="
+            w-full
+            h-auto
+            max-w-5xl
+            bg-indigo-300
+            flex
+            justify-center
+            flex-col
+            mt-10
+            mb-10
+            rounded-md
+            px-5
+            py-2
+            pb-5
+            shadow-sm
+            m-auto
+            xl:w-full
+            xl:max-w-sm
+            xl:justify-start
+          "
+        >
+          <h3
+            class="
+              font-bold
+              flex
+              justify-center
+              text-purple-900
+              font-inter
+              my-3
+              py-2
+            "
+          >
+            Popular TV Shows
+            <span class="material-icons ml-2">trending_up</span>
+          </h3>
+
+          <!-- <div class="my-1 bg-indigo-200 flex font-inter rounded-md">
+            <img
+              src="/images/greyanatmoy.jpg"
+              alt=""
+              class="w-10 rounded-l-md"
+            />
+            <div class="series__info flex w-auto m-auto flex-col mx-5">
+              <h2
+                class="
+                  font-bold
+                  text-purple-900
+                  justify-center
+                  hover:text-purple-700
+                  cursor-pointer
+                "
+              >
+                Grey's Anatomy (2005)
+              </h2>
+              <p class="text-xs font-bold text-purple-900">
+                Genre:
+                <span class="font-medium text-purple-600">Drama</span>
+              </p>
+              <p class="text-xs font-bold text-purple-900">
+                Play time:
+                <span class="font-medium text-purple-600"> 43m</span>
+              </p>
+            </div>
+          </div>
+
+          <div class="my-1 bg-indigo-200 flex font-inter rounded-md">
+            <img src="/images/riverdale.jpg" alt="" class="w-16 rounded-l-md" />
+            <div class="series__info flex w-auto m-auto flex-col mx-5">
+              <h2
+                class="
+                  font-bold
+                  text-purple-900
+                  justify-center
+                  hover:text-purple-700
+                  cursor-pointer
+                "
+              >
+                Riverdale (2017)
+              </h2>
+              <p class="text-xs font-bold text-purple-900">
+                Genre:
+                <span class="font-medium text-purple-600"
+                  >Mystery, Drama, Crime
+                </span>
+              </p>
+              <p class="text-xs font-bold text-purple-900">
+                Play time:
+                <span class="font-medium text-purple-600"> 45m</span>
+              </p>
+            </div>
+          </div>
+
+          <div class="my-1 bg-indigo-200 flex font-inter rounded-md">
+            <img src="/images/theflash.jpg" alt="" class="w-16 rounded-l-md" />
+            <div class="series__info flex w-auto m-auto flex-col mx-5">
+              <h2
+                class="
+                  font-bold
+                  text-purple-900
+                  justify-center
+                  hover:text-purple-700
+                  cursor-pointer
+                "
+              >
+                The Flash (2014)
+              </h2>
+              <p class="text-xs font-bold text-purple-900">
+                Genre:
+                <span class="font-medium text-purple-600"
+                  >Drama, Sci-Fi & Fantasy
+                </span>
+              </p>
+              <p class="text-xs font-bold text-purple-900">
+                Play time:
+                <span class="font-medium text-purple-600"> 44m</span>
+              </p>
+            </div>
+          </div>
+
+          <div class="my-1 bg-indigo-200 flex font-inter rounded-md">
+            <img src="/images/lucifer.jpg" alt="" class="w-16 rounded-l-md" />
+            <div class="series__info flex w-auto m-auto flex-col mx-5">
+              <h2
+                class="
+                  font-bold
+                  text-purple-900
+                  justify-center
+                  hover:text-purple-700
+                  cursor-pointer
+                "
+              >
+                Lucifer (2016)
+              </h2>
+              <p class="text-xs font-bold text-purple-900">
+                Genre:
+                <span class="font-medium text-purple-600"
+                  >Crime, Sci-Fi & Fantasy
+                </span>
+              </p>
+              <p class="text-xs font-bold text-purple-900">
+                Play time:
+                <span class="font-medium text-purple-600"> 45m</span>
+              </p>
+            </div>
+          </div> -->
+        </div>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer">
+      <div
+        class="
+          w-fill
+          h-24
+          mt-10
+          pb-4
+          flex
+          justify-end
+          items-center
+          flex-col
+          font-inter
+          text-sm text-gray-800
+        "
+      >
+        <p class="font-semibold cursor-default">MovieHunt © 2021</p>
+        <div class="space-x-5 mt-2">
+          <a href="#" class="hover:text-purple-400 hover:font-bold"
+            >Privacy policy</a
+          >
+          <a href="#" class="hover:text-purple-400 hover:font-bold"
+            >Terms & Conditions</a
+          >
+          <a href="#" class="hover:text-purple-400 hover:font-bold"
+            >Contact Us</a
+          >
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

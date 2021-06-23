@@ -9,7 +9,7 @@ switch (pagePath) {
     document.getElementById("upcoming").style.color = "rgba(67, 56, 202, 1)";
     break;
 
-  case "toprated":
-    document.getElementById("toprated").style.color = "rgba(67, 56, 202, 1)";
+  case "search":
+    document.getElementById("search").style.color = "rgba(67, 56, 202, 1)";
     break;
 }

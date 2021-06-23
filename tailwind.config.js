@@ -1,3 +1,5 @@
+const { urlencoded } = require("express");
+
 module.exports = {
   mode: "jit",
   purge: {
@@ -10,6 +12,10 @@ module.exports = {
       fontFamily: {
         inter: ["Roboto", "sans-serif"],
       },
+      backgroundImage: (theme) => ({
+        "hero-pattern":
+          "url('https://images.unsplash.com/photo-1585951237313-1979e4df7385?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80')",
+      }),
     },
   },
   variants: {

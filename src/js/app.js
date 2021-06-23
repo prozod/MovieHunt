@@ -1,4 +1,5 @@
 import { showId, movieId } from "./genres.js";
+
 const searchForm = document.querySelector("form");
 const searchInput = document.querySelector(".searchbox");
 const browsedContainer = document.querySelector(".browsingList");
@@ -33,7 +34,6 @@ async function fetchMovies(searchQuery, page) {
 
   return data;
 }
-
 
 const createMovieCard = (movies) => {
   const movieCard = ` ${movies
@@ -132,6 +132,7 @@ const createPagination = (pages) => {
       maxLeft = 1;
     }
   }
+
   for (let page = maxLeft; page <= maxRight; page++) {
     paginationContainer.innerHTML += `<button value=${page} class="mx-2 p-2 px-4 my-2  text-purple-900  bg-indigo-300 rounded-md font-bold active:bg-indigo-200 focus:outline-none"> ${page}</button>`;
   }
@@ -171,10 +172,8 @@ searchForm.addEventListener("submit", (e) => {
       return;
     }
 
-    const half = Math.ceil(data.results.length / 2);
-    const halfOne = data.results.slice(0, half);
-    
-    state.movies = halfOne;
+
+    state.movies = data.results;
     state.total_pages = data.total_pages;
     state.current_page = data.page;
     state.query = searchQuery;
@@ -192,14 +191,12 @@ paginationContainer.addEventListener("click", (e) => {
   let clickedBtn = e.target.closest("button");
 
   if (!clickedBtn) return;
-
   if (clickedBtn) {
     state.current_page = clickedBtn.value;
     
     fetchMovies(state.query, state.current_page).then((data) => {
-      const half = Math.ceil(data.results.length / 2);
-      const halfOne = data.results.slice(0, half);
-      state.movies = halfOne;
+      
+      state.movies = data.results;
       state.total_pages = data.total_pages;
 
       browsedContainer.innerHTML = "";
@@ -208,9 +205,7 @@ paginationContainer.addEventListener("click", (e) => {
       createMovieCard(state.movies);
       createPagination(state.total_pages);
 
-      if (clickedBtn.classList.contains("bg-indigo-300")) {
-        clickedBtn.classList.replace("bg-indigo-300", "bg-red-500")
-      }
+      
     });
   }
 
@@ -233,8 +228,6 @@ async function fetchPopularShows() {
 fetchPopularShows().then((data) => {
   trendingShows(data.results.slice(0, 7));
 });
-
-
 
 
 function trendingShows(shows) {
@@ -282,3 +275,5 @@ function trendingShows(shows) {
 
   trendingContainer.insertAdjacentHTML("beforeend", show);
 }
+
+
