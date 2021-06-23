@@ -1,12 +1,13 @@
+import { movieId } from "./genres.js";
+
 const apiKey = "1f4df7f17529b542876a985507f244b0";
 const IMAGE_URL = "https://image.tmdb.org/t/p/w500";
 const upcomingContainer = document.querySelector(".upcomingContainer");
 const similarModal = document.getElementById("similarMoviesModal");
-/// POPULAR MOVIES
+///UPCOMING MOVIES
 
-console.log(document.querySelector(".similarTo"));
 
-async function fetchPopularMoviesPage() {
+async function fetchUpcomingMoviesPage() {
   let response = await fetch(
     `https://api.themoviedb.org/3/movie/upcoming?api_key=${apiKey}&language=en-US&page=1`
   );
@@ -15,9 +16,9 @@ async function fetchPopularMoviesPage() {
   return data;
 }
 
-fetchPopularMoviesPage().then((data) => {
+fetchUpcomingMoviesPage().then((data) => {
   console.log(data);
-  popularMovies(data.results);
+  upcomingMovies(data.results);
 });
 
 document.addEventListener("click", (e) => {
@@ -52,6 +53,8 @@ document.addEventListener("click", (e) => {
     .querySelector(".similarTo")
     .insertAdjacentHTML("afterbegin", similarTo());
 });
+
+// CLOSE MODAL ON CLICK OUTSIDE
 
 document.addEventListener("click", (e) => {
   if (!e.target.classList.contains("modalbackdrop")) return;
@@ -91,24 +94,9 @@ const similarMovies = function (movies) {
     .insertAdjacentHTML("beforeend", movie);
 };
 
-// async function fetchMovieInfo() {
-//   if (movieId !== []) {
-//     let response = await fetch(
-//       `https://api.themoviedb.org/3/movie/${movieId[0]}/similar?api_key=${apiKey}&language=en-US&page=1`
-//     );
-//     let data = await response.json();
-//     return data;
-//   }
-// }
 
-// fetchMovieInfo();
-
-// fetchMovieInfo().then((data) => {
-//   console.log(data);
-// });
-
-const popularMovies = function (movies) {
-  console.log(movies);
+const upcomingMovies = function (movies) {
+ 
   const movie = movies
     .map((movie) => {
       if (
@@ -132,6 +120,8 @@ const popularMovies = function (movies) {
         transform
         hover:scale-105
         hover:z-40
+  
+
         duration-200
       "
       data-id="${movie.id}"
@@ -170,19 +160,25 @@ const popularMovies = function (movies) {
         scale-90
         hover:scale-100
         hover:cursor-pointer
-    bg-gray-900 bg-opacity-80
+      bg-gray-900 bg-opacity-80
         overflow-hidden
         px-3" 
         data-id="${movie.id}">
-      <p class="movieTitle text-white text-1xl font-bold  pb-3">
+        
+      <p class="movieTitle text-white text-1xl font-bold ">
         ${movie.title} (${movie.release_date.slice(0, -6)})
       </p>
-      <p class="text-white text-sm font-bold  pb-3">
-        Official release date: ${movie.release_date}
+
+      <p class="text-white text-xs font-bold">
+        Official release date: <span class="text-purple-400">${movie.release_date}</span>
       </p>
-        <p class="text-gray-300 text-sm  mb-5 line-clamp-5 ">${
-          movie.overview
-        }</p>
+
+      <p class="text-white text-xs font-bold  pb-5">
+        Genre: <span class="text-purple-400">${movieId(movie.genre_ids)}</span>
+      </p>
+
+      <p class="text-gray-300 text-sm  mb-5 line-clamp-5 ">${movie.overview}</p>
+
       </div>
     </div>
 

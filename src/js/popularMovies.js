@@ -1,3 +1,4 @@
+import {movieId} from "./genres.js"
 const apiKey = "1f4df7f17529b542876a985507f244b0";
 const IMAGE_URL = "https://image.tmdb.org/t/p/w500";
 const popularContainer = document.querySelector(".popularContainer");
@@ -88,8 +89,11 @@ const popularMovies = function (movies) {
       "
      
       >
-      <p class="text-white text-1xl font-bold  pb-3">
+      <p class="text-white text-1xl font-bold ">
         ${movie.title} (${movie.release_date.slice(0, -6)})
+      </p>
+      <p class="text-purple-400 text-xs  font-semibold pb-5">
+        ${movieId(movie.genre_ids)}
       </p>
         <p class="text-gray-300 text-sm  mb-5 line-clamp-5 ">${
           movie.overview

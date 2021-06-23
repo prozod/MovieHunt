@@ -1,11 +1,12 @@
+import { showId, movieId } from "./genres.js";
 const searchForm = document.querySelector("form");
 const searchInput = document.querySelector(".searchbox");
-const movieTitle = document.querySelector(".movie__info");
 const browsedContainer = document.querySelector(".browsingList");
 const trendingContainer = document.getElementById("trending");
 const paginationContainer = document.querySelector(".paginationBtn");
 const apiKey = "1f4df7f17529b542876a985507f244b0";
 const IMAGE_URL = "https://image.tmdb.org/t/p/w500";
+
 
 // pagination
 // pagination
@@ -33,11 +34,11 @@ async function fetchMovies(searchQuery, page) {
   return data;
 }
 
+
 const createMovieCard = (movies) => {
   const movieCard = ` ${movies
     .map((movie) => {
       if (
-        movie.poster_path &&
         movie.release_date !== "" &&
         movie.vote_average > 0
       )
@@ -59,7 +60,7 @@ const createMovieCard = (movies) => {
     " data-movie-id="${movie.id}"
   >
     <img
-      src="${IMAGE_URL}${movie.poster_path}"
+      src="${!movie.poster_path ? `https://via.placeholder.com/160x240/C7D2FE/000000?text=No+image+available.` : IMAGE_URL+movie.poster_path}"
       alt=""
       class="w-40 h-auto rounded-md mt-5 md:mt-0"
     />
@@ -83,22 +84,21 @@ const createMovieCard = (movies) => {
         } (US)</span>
       </p>
       <p class="font-bold text-purple-900">
-        Genre:
+        Genre: 
         <span class="font-medium text-purple-600"
-          >${movie.runtime}</span
+          >${movieId(movie.genre_ids)}</span
         >
       </p>
       
-      <p class="font-bold text-purple-900">
+      <p class="font-bold text-purple-900 flex items-center">
         Average rating:
         <span class="font-medium text-purple-600">
-        ${movie.vote_average}/10
+        <span class="bg-purple-400 rounded-md px-3 py-1 text-white text-xs ml-1">${movie.vote_average}</span>
         </span>
       </p>
 
       <p class="font-bold text-purple-900">
-        Overview:
-        <span class="font-medium text-purple-600"
+        Overview:<span class="font-medium text-purple-600 line-clamp-3"
           >${movie.overview}</span
         >
       </p>
@@ -113,7 +113,8 @@ const createMovieCard = (movies) => {
 };
 
 const createPagination = (pages) => {
-  console.log(pages);
+  
+
   paginationContainer.innerHTML = "";
   let maxLeft = Number(state.current_page) - Math.floor(state.pagination / 2);
   let maxRight = Number(state.current_page) + Math.floor(state.pagination / 2);
@@ -131,8 +132,6 @@ const createPagination = (pages) => {
       maxLeft = 1;
     }
   }
-  console.log(state.current_page);
-  console.log(maxLeft, maxRight);
   for (let page = maxLeft; page <= maxRight; page++) {
     paginationContainer.innerHTML += `<button value=${page} class="mx-2 p-2 px-4 my-2  text-purple-900  bg-indigo-300 rounded-md font-bold active:bg-indigo-200 focus:outline-none"> ${page}</button>`;
   }
@@ -148,6 +147,7 @@ const createPagination = (pages) => {
       paginationContainer.innerHTML +
       `<button value=${pages} class="bg-indigo-300 text-purple-900  px-5 py-2 my-2 mx-1 rounded-md font-bold active:bg-indigo-200 focus:outline-none">Last</button>`;
   }
+
 };
 
 searchForm.addEventListener("submit", (e) => {
@@ -173,7 +173,7 @@ searchForm.addEventListener("submit", (e) => {
 
     const half = Math.ceil(data.results.length / 2);
     const halfOne = data.results.slice(0, half);
-    console.log(halfOne);
+    
     state.movies = halfOne;
     state.total_pages = data.total_pages;
     state.current_page = data.page;
@@ -188,17 +188,17 @@ searchForm.addEventListener("submit", (e) => {
 });
 
 paginationContainer.addEventListener("click", (e) => {
-  clickedBtn = e.target.closest("button");
+  e.preventDefault()
+  let clickedBtn = e.target.closest("button");
 
   if (!clickedBtn) return;
 
   if (clickedBtn) {
     state.current_page = clickedBtn.value;
-
+    
     fetchMovies(state.query, state.current_page).then((data) => {
       const half = Math.ceil(data.results.length / 2);
       const halfOne = data.results.slice(0, half);
-      console.log(halfOne);
       state.movies = halfOne;
       state.total_pages = data.total_pages;
 
@@ -207,8 +207,14 @@ paginationContainer.addEventListener("click", (e) => {
 
       createMovieCard(state.movies);
       createPagination(state.total_pages);
+
+      if (clickedBtn.classList.contains("bg-indigo-300")) {
+        clickedBtn.classList.replace("bg-indigo-300", "bg-red-500")
+      }
     });
   }
+
+  
 });
 
 /// POPULAR SHOWS
@@ -228,11 +234,16 @@ fetchPopularShows().then((data) => {
   trendingShows(data.results.slice(0, 7));
 });
 
+
+
+
 function trendingShows(shows) {
   const show = `${shows
     .map((show) => {
       return `
-    <div class="my-1 bg-indigo-200 flex font-inter rounded-md">
+    <div class="my-1 bg-indigo-200 flex font-inter rounded-md" data-id="${
+      show.id
+    }" >
             <img
               src="${IMAGE_URL}${show.poster_path}"
               alt=""
@@ -252,7 +263,9 @@ function trendingShows(shows) {
               </h2>
               <p class="text-xs font-bold text-purple-900">
                 Genre:
-                <span class="font-medium text-purple-600">Drama</span>
+                <span class="font-medium text-purple-600">${showId(
+                  show.genre_ids
+                )}</span>
               </p>
               <p class="text-xs font-bold text-purple-900">
                 Rating:
@@ -260,6 +273,7 @@ function trendingShows(shows) {
                   show.vote_average
                 }/10</span>
               </p>
+              
             </div>
           </div>
     `;
