@@ -34,40 +34,53 @@
   >
     <!-- LOGO + NAVBAR -->
 
-    <div class="flex justify-center">
-      <!-- <h1
-              class="text-3xl font-black text-purple-600 font-inter py-10 tracking-widest antialiased"
-            >
-              MOVIEHUNT
-            </h1> -->
-      <a href="/"
-        ><img src="/images/logo.svg" alt="MovieHunt Logo" class="mt-5 w-96"
-      /></a>
-    </div>
-    <div
-      class="w-auto mt-5 flex justify-center font-inter space-x-10"
-      id="navbar"
-    >
-    <a
-        href="/search"
-        class="font-bold text-gray-900 hover:text-indigo-600"
-        id="search"
-        >Search</a
+    <nav class="py-2">
+      <div
+        class="
+          flex
+          items-center
+          flex-col
+          justify-between
+          w-10/12
+          lg:w-8/12
+          m-auto
+        "
       >
-      <a
-        href="/popular"
-        class="font-bold text-gray-900 hover:text-indigo-600"
-        id="popular"
-        >Popular</a
+        <div class="flex justify-center">
+          <!-- <h1
+        class="text-3xl font-black text-purple-600 font-inter py-10 tracking-widest antialiased"
       >
-      <a
-        href="/upcoming"
-        class="font-bold text-gray-900 hover:text-indigo-600"
-        id="upcoming"
-        >Upcoming</a
-      >
-     
-    </div>
+        MOVIEHUNT
+      </h1> -->
+          <a href="/"
+            ><img src="/images/logo.svg" alt="MovieHunt Logo" class="w-96 mb-2"
+          /></a>
+        </div>
+        <div
+          class="w-auto flex justify-center font-inter space-x-10"
+          id="navbar"
+        >
+          <a
+            href="/search"
+            class="font-bold text-gray-900 hover:text-indigo-600"
+            id="search"
+            >Search</a
+          >
+          <a
+            href="/popular"
+            class="font-bold text-gray-900 hover:text-indigo-600"
+            id="popular"
+            >Popular</a
+          >
+          <a
+            href="/upcoming"
+            class="font-bold text-gray-900 hover:text-indigo-600"
+            id="upcoming"
+            >Upcoming</a
+          >
+        </div>
+      </div>
+    </nav>
 
     <!-- CONTENT -->
     <div class="flex relative items-center justify-center mt-8">
@@ -137,8 +150,7 @@
           mt-24
           sm:grid-cols-2
           md:grid-cols-3
-          lg:grid-cols-4
-          lg:mt-24
+          lg:grid-cols-4 lg:mt-24
           sm:mt-20
         "
       >

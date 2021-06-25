@@ -19,6 +19,7 @@
   },
   "dependencies": {
     "@glidejs/glide": "^3.4.1",
+    "@tailwindcss/aspect-ratio": "^0.2.1",
     "@tailwindcss/line-clamp": "^0.2.1",
     "dotenv": "^9.0.2",
     "express": "^4.17.1",

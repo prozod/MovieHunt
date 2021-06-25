@@ -6,7 +6,6 @@ const upcomingContainer = document.querySelector(".upcomingContainer");
 const similarModal = document.getElementById("similarMoviesModal");
 ///UPCOMING MOVIES
 
-
 async function fetchUpcomingMoviesPage() {
   let response = await fetch(
     `https://api.themoviedb.org/3/movie/upcoming?api_key=${apiKey}&language=en-US&page=1`
@@ -94,9 +93,7 @@ const similarMovies = function (movies) {
     .insertAdjacentHTML("beforeend", movie);
 };
 
-
 const upcomingMovies = function (movies) {
- 
   const movie = movies
     .map((movie) => {
       if (
@@ -170,7 +167,9 @@ const upcomingMovies = function (movies) {
       </p>
 
       <p class="text-white text-xs font-bold">
-        Official release date: <span class="text-purple-400">${movie.release_date}</span>
+        Official release date: <span class="text-purple-400">${
+          movie.release_date
+        }</span>
       </p>
 
       <p class="text-white text-xs font-bold  pb-5">

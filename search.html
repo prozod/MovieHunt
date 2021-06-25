@@ -30,40 +30,53 @@
     "
   >
     <!-- LOGO + NAVBAR -->
-    <div class="flex justify-center">
-      <!-- <h1
+    <nav class="py-2">
+      <div
+        class="
+          flex
+          items-center
+          flex-col
+          justify-between
+          w-10/12
+          lg:w-8/12
+          m-auto
+        "
+      >
+        <div class="flex justify-center">
+          <!-- <h1
         class="text-3xl font-black text-purple-600 font-inter py-10 tracking-widest antialiased"
       >
         MOVIEHUNT
       </h1> -->
-      <a href="/"
-        ><img src="/images/logo.svg" alt="MovieHunt Logo" class="mt-5 w-96"
-      /></a>
-    </div>
-    <div
-      class="w-auto mt-5 flex justify-center font-inter space-x-10"
-      id="navbar"
-    >
-    <a
-        href="/search"
-        class="font-bold text-gray-900 hover:text-indigo-600"
-        id="search"
-        >Search</a
-      >
-      <a
-        href="/popular"
-        class="font-bold text-gray-900 hover:text-indigo-600"
-        id="popular"
-        >Popular</a
-      >
-      <a
-        href="/upcoming"
-        class="font-bold text-gray-900 hover:text-indigo-600"
-        id="upcoming"
-        >Upcoming</a
-      >
-     
-    </div>
+          <a href="/"
+            ><img src="/images/logo.svg" alt="MovieHunt Logo" class="w-64 mb-2"
+          /></a>
+        </div>
+        <div
+          class="w-auto flex justify-center font-inter space-x-10"
+          id="navbar"
+        >
+          <a
+            href="/search"
+            class="font-bold text-gray-900 hover:text-indigo-600"
+            id="search"
+            >Search</a
+          >
+          <a
+            href="/popular"
+            class="font-bold text-gray-900 hover:text-indigo-600"
+            id="popular"
+            >Popular</a
+          >
+          <a
+            href="/upcoming"
+            class="font-bold text-gray-900 hover:text-indigo-600"
+            id="upcoming"
+            >Upcoming</a
+          >
+        </div>
+      </div>
+    </nav>
     <!-- CONTENT -->
     <div
       class="
@@ -377,9 +390,7 @@
           justify-center
           max-w-6xl
           mx-0
-          xl:w-full
-          xl:max-w-md
-          xl:h-3/4
+          xl:w-full xl:max-w-md xl:h-3/4
           items-start
           sticky
           top-2
@@ -403,9 +414,7 @@
             pb-5
             shadow-sm
             m-auto
-            xl:w-full
-            xl:max-w-sm
-            xl:justify-start
+            xl:w-full xl:max-w-sm xl:justify-start
           "
         >
           <h3

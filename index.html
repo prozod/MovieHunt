@@ -14,12 +14,16 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="/css/style.css" />
-
     <link rel="stylesheet" href="/css/glide.core.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.15.3/css/all.css"
+      integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk"
+      crossorigin="anonymous"
+    />
 
     <script type="module" src="/js/landing.js" defer></script>
     <script src="/js/highlights.js" defer></script>
-
     <title>MovieHunt | Vanilla JS</title>
   </head>
   <body
@@ -81,11 +85,13 @@
       </div>
     </nav>
     <!-- CONTENT -->
+
+    <!--MAIN HERO LANDING-->
     <section
       class="
         bg-hero-pattern
         m-auto
-        w-10/12
+        w-full
         lg:w-8/12
         flex
         justify-center
@@ -102,25 +108,28 @@
         </p>
         <button
           class="
-            bg-purple-200
-            font-bold
-            text-gray-900
-            w-32
+            bg-purple-500
+            text-white
+            w-48
             rounded-md
             drop-shadow-md
             py-2
             px-4
             mt-5
-            hover:bg-purple-300
+            hover:bg-purple-300 hover:text-gray-900
+            duration-150
           "
         >
-          <a href="/search">Search</a>
+          <a href="/search">Looking for more?</a>
         </button>
       </div>
     </section>
 
+    <!--TRENDING NOW-->
     <section class="carousels">
-      <div class="glide flex justify-center mt-2 flex-col items-center">
+      <div
+        class="glide flex flex-none justify-center mt-2 flex-col items-center"
+      >
         <div
           class="
             absolute
@@ -128,9 +137,8 @@
             justify-start
             mt-5
             inset-0
-            flex-col
             m-auto
-            w-10/12
+            w-full
             lg:w-8/12
           "
         >
@@ -147,33 +155,61 @@
               items-center
             "
           >
-            <div class="w-1 h-8 bg-red-600 mr-2 items-center"></div>
+            <div class="w-1 h-12 lg:h-8 bg-yellow-600 mr-2 items-center"></div>
             TRENDING NOW
-            <div class="ml-5 flex text-xs md:text-sm hover:cursor-pointer">
-              <p class="bg-indigo-400 px-4 py-2 rounded-md text-white">On TV</p>
+            <div class="flex text-xs ml-5 md:text-sm hover:cursor-pointer">
+              <p class="bg-purple-400 px-4 py-2 rounded-md text-white">On TV</p>
               <p class="px-4 py-2">In Theaters</p>
               <p class="px-4 py-2">Streaming</p>
             </div>
           </h1>
         </div>
-
-        <div class="glide__track w-10/12 lg:w-8/12 mt-20" data-glide-el="track">
+        <!--SLIDES -->
+        <div
+          class="glide__track w-full lg:w-8/12 mt-24 md:mt-20"
+          data-glide-el="track"
+        >
           <div class="glide__slides"></div>
         </div>
+        <!--SLIDES -->
+        <!--ARROWS -->
 
-        <div class="glide absolute flex justify-center">
-          <div class="glide__arrows absolute" data-glide-el="controls">
+        <div
+          class="
+            glide glide__track
+            w-full
+            lg:w-8/12
+            flex
+            justify-center
+            items-center
+          "
+          data-glide-el="track"
+        >
+          <div
+            class="
+              glide__arrows
+              flex
+              justify-between
+              items-center
+              w-full
+              lg:w-8/12
+            "
+            data-glide-el="controls"
+          >
             <button class="glide__arrow glide__arrow--left" data-glide-dir="<">
-              prev
+              <i class="p-2 text-indigo-300 fas fa-chevron-left"></i>
             </button>
             <button class="glide__arrow glide__arrow--right" data-glide-dir=">">
-              next
+              <i class="p-2 text-indigo-300 fas fa-chevron-right"></i>
             </button>
           </div>
         </div>
+
+        <!--ARROWS -->
       </div>
     </section>
 
+    <!--POPULAR ACTORS -->
     <section>
       <div class="glide actors flex justify-center mt-2 flex-col items-center">
         <div
@@ -185,7 +221,7 @@
             inset-0
             flex-col
             m-auto
-            w-10/12
+            w-full
             lg:w-8/12
           "
         >
@@ -203,27 +239,75 @@
               m-auto
             "
           >
-            <div class="w-1 h-8 bg-blue-600 mr-2 items-center"></div>
+            <div class="w-1 h-8 bg-pink-500 mr-2 items-center"></div>
             POPULAR ACTORS
           </h1>
         </div>
 
-        <div class="glide__track w-10/12 lg:w-8/12 mt-16" data-glide-el="track">
+        <div
+          class="glide__track w-full lg:w-8/12 mt-16 relative"
+          data-glide-el="track"
+        >
           <div class="glide__slides popularPeople"></div>
         </div>
 
-        <div class="glide absolute flex justify-center">
-          <div class="glide__arrows absolute" data-glide-el="controls">
+        <!--ARROWS -->
+
+        <div
+          class="
+            glide glide__track
+            w-full
+            lg:w-8/12
+            flex
+            justify-center
+            items-center
+          "
+          data-glide-el="track"
+        >
+          <div
+            class="
+              glide__arrows
+              flex
+              justify-between
+              items-center
+              w-full
+              lg:w-8/12
+            "
+            data-glide-el="controls"
+          >
             <button class="glide__arrow glide__arrow--left" data-glide-dir="<">
-              prev
+              <i class="p-2 text-indigo-300 fas fa-chevron-left"></i>
             </button>
             <button class="glide__arrow glide__arrow--right" data-glide-dir=">">
-              next
+              <i class="p-2 text-indigo-300 fas fa-chevron-right"></i>
             </button>
           </div>
         </div>
+
+        <!--ARROWS -->
       </div>
     </section>
+
+    <!--VIDEOS-->
+    <section
+      class="
+        bg-video-area
+        m-auto
+        w-full
+        lg:w-8/12
+        flex
+        justify-center
+        flex-col
+        bg-contain bg-center bg-no-repeat bg-fixed
+        mt-5
+        h-64
+      "
+    >
+      <div class="text-white flex flex-col p-8">
+        <h1 class="text-4xl font-bold drop-shadow-md">Latest trailers</h1>
+      </div>
+    </section>
+
     <!-- FOOTER -->
     <div class="footer">
       <div
@@ -255,5 +339,6 @@
       </div>
     </div>
   </body>
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.2.0/glide.js"></script>
 </html>
