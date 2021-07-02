@@ -21,10 +21,11 @@ fetchUpcomingMoviesPage().then((data) => {
 });
 
 document.addEventListener("click", (e) => {
+  const movieId = e.target.dataset.id;
   if (!e.target.classList.contains("backdrop")) return;
 
   fetch(
-    `https://api.themoviedb.org/3/movie/${e.target.dataset.id}/similar?api_key=${apiKey}&language=en-US&page=1`
+    `https://api.themoviedb.org/3/movie/${movieId}/similar?api_key=${apiKey}&language=en-US&page=1`
   )
     .then((response) => response.json())
     .then((data) => similarMovies(data.results.slice(-10)));

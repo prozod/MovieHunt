@@ -1,6 +1,9 @@
 let pagePath = window.location.pathname.slice(1);
 
 switch (pagePath) {
+  default:
+    document.getElementById("home").style.color = "rgba(67, 56, 202, 1)";
+    break;
   case "popular":
     document.getElementById("popular").style.color = "rgba(67, 56, 202, 1)";
     break;

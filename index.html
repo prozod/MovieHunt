@@ -4,6 +4,8 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" 
+content="MovieHunt is a movie search engine. Are you looking for a movie? We got you! Are you looking for movies similar to something you've recently watched? Say no more.">
     <link
       rel="shortcut icon"
       href="/images/MOVIEHUNTfavicon.svg"
@@ -14,7 +16,10 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="/css/style.css" />
-    <link rel="stylesheet" href="/css/glide.core.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/glider-js@1/glider.min.css"
+    />
     <link
       rel="stylesheet"
       href="https://use.fontawesome.com/releases/v5.15.3/css/all.css"
@@ -36,6 +41,40 @@
       font-inter
     "
   >
+    <!--MODAL MOVIE INFO-->
+    <section class="hidden" id="modalMovieInfo">
+      <div class="fixed z-50  bg-gray-900 bg-opacity-90 w-screen h-screen">
+        <div class="w-full h-full flex" id="backdropMovieInfo">
+
+          <!-- <div class="bg-gray-900 flex justify-center items-center w-full md:w-3/4 lg:w-3/4 xl:w-1/3 m-auto rounded-b-md">
+            <div class="flex justify-center flex-col w-full" >
+              <iframe loading="lazy" class="w-full h-96" src="https://www.youtube.com/embed/4tIEzyvEyI8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+              <div class="my-2 pl-4 flex pb-5">
+              <div class="flex flex-col justify-center">
+                <div class="flex items-center mb-5">
+                <div class="w-1 h-12 lg:h-10 bg-purple-500 mr-2 mt-2"></div>
+                <p class="font-bold text-3xl text-white pt-2  ">Outer Banks 2</p>
+               
+              </div>
+              <p class=" text-sm text-white text-opacity-70 ">On an island of haves and have-nots, teen John B enlists his three best friends to hunt for a legendary treasure linked to his father's disappearance.</p>
+              </div>
+
+              <div class="flex flex-col pl-1">
+              <p class="text-sm text-white"><span class="font-bold text-purple-400">Genre: </span>Crime</p>
+              <p class="font-bold text-sm text-purple-400 mb-5">84,5% popularity</p>
+              <p class=" text-sm text-white text-opacity-70"><span class="font-bold text-md text-purple-400">Cast:</span> Tom Ellis, Lauren German, Kevin Alejandro, D.B. Woodside, Lesley-Ann Brandt, Rachael Harris, more</p>
+            </div>
+              
+              
+            </div>
+              
+            </div>
+        </div> -->
+      </div>
+      </div>
+    </section>
+
     <!-- LOGO + NAVBAR -->
     <nav class="py-2">
       <div
@@ -55,29 +94,35 @@
       >
         MOVIEHUNT
       </h1> -->
-          <a href="#"
-            ><img src="/images/logo.svg" alt="MovieHunt Logo" class="w-64 mb-2"
+          <a href="#" class="p-1 focus:outline-none focus:ring-2 focus:ring-indigo-600 rounded-md"
+            ><img src="/images/logo.svg" width="256" height="55" alt="MovieHunt Logo" class="w-64 mb-2 "
           /></a>
         </div>
         <div
-          class="w-auto flex justify-center font-inter space-x-10"
+          class="w-auto flex justify-center font-inter space-x-10 mt-3"
           id="navbar"
         >
           <a
+            href="/"
+            class="font-bold text-gray-900 hover:text-indigo-600 p-1 focus:outline-none focus:ring-2 focus:ring-indigo-600 rounded-md"
+            id="home"
+            > Home</a
+          >
+          <a
             href="/search"
-            class="font-bold text-gray-900 hover:text-indigo-600"
+            class="font-bold text-gray-900 hover:text-indigo-600 p-1 focus:outline-none focus:ring-2 focus:ring-indigo-600 rounded-md"
             id="search"
-            >Search</a
+            ></i> Search</a
           >
           <a
             href="/popular"
-            class="font-bold text-gray-900 hover:text-indigo-600"
+            class="font-bold text-gray-900 hover:text-indigo-600 p-1 focus:outline-none focus:ring-2 focus:ring-indigo-600 rounded-md"
             id="popular"
             >Popular</a
           >
           <a
             href="/upcoming"
-            class="font-bold text-gray-900 hover:text-indigo-600"
+            class="font-bold text-gray-900 hover:text-indigo-600 p-1 focus:outline-none focus:ring-2 focus:ring-indigo-600 rounded-md"
             id="upcoming"
             >Upcoming</a
           >
@@ -85,6 +130,8 @@
       </div>
     </nav>
     <!-- CONTENT -->
+
+ 
 
     <!--MAIN HERO LANDING-->
     <section
@@ -101,14 +148,14 @@
         mt-5
       "
     >
-      <div class="text-white flex flex-col p-8">
+      <div class="text-white flex flex-col p-8 ml-5">
         <h1 class="text-4xl font-bold drop-shadow-md">Welcome.</h1>
         <p class="text-xl font-light drop-shadow-md">
           Millions of movies, TV shows and people to discover. Explore now.
         </p>
         <button
           class="
-            bg-purple-500
+            bg-purple-600
             text-white
             w-48
             rounded-md
@@ -126,22 +173,12 @@
     </section>
 
     <!--TRENDING NOW-->
-    <section class="carousels">
+    <section >
+      <!--TEXT-->
       <div
-        class="glide flex flex-none justify-center mt-2 flex-col items-center"
+        class="glide flex flex-none justify-center mt-2 flex-col items-center "
       >
-        <div
-          class="
-            absolute
-            flex
-            justify-start
-            mt-5
-            inset-0
-            m-auto
-            w-full
-            lg:w-8/12
-          "
-        >
+        <div class="flex justify-start mt-5 inset-0 m-auto w-full lg:w-8/12">
           <h1
             class="
               absolute
@@ -157,74 +194,56 @@
           >
             <div class="w-1 h-12 lg:h-8 bg-yellow-600 mr-2 items-center"></div>
             TRENDING NOW
-            <div class="flex text-xs ml-5 md:text-sm hover:cursor-pointer">
-              <p class="bg-purple-400 px-4 py-2 rounded-md text-white">On TV</p>
-              <p class="px-4 py-2">In Theaters</p>
-              <p class="px-4 py-2">Streaming</p>
+            <div
+              class="flex text-xs ml-5 md:text-sm hover:cursor-pointer"
+              id="trendFilter"
+            >
+              <p
+                class="bg-purple-500 px-4 py-2 rounded-md text-white "
+                data-trend="day"
+                id="day"
+              >
+                Today
+              </p>
+              <p class="px-4 py-2 rounded-md" data-trend="week" id="week">
+                This week
+              </p>
             </div>
           </h1>
         </div>
-        <!--SLIDES -->
-        <div
-          class="glide__track w-full lg:w-8/12 mt-24 md:mt-20"
-          data-glide-el="track"
-        >
-          <div class="glide__slides"></div>
-        </div>
-        <!--SLIDES -->
-        <!--ARROWS -->
+      </div>
 
-        <div
-          class="
-            glide glide__track
-            w-full
-            lg:w-8/12
-            flex
-            justify-center
-            items-center
-          "
-          data-glide-el="track"
-        >
-          <div
-            class="
-              glide__arrows
-              flex
-              justify-between
-              items-center
-              w-full
-              lg:w-8/12
-            "
-            data-glide-el="controls"
+      <!--SLIDES-->
+      <div class="flex flex-col relative justify-center items-center mt-14 ">
+        <div class="glider w-full lg:w-8/12 flex trendingNow overflow-hidden"></div>
+
+        <!--BUTTONS-->
+        <div class="absolute flex justify-between w-full lg:w-8/12 mx-auto">
+          <button
+            aria-label="Previous"
+            class="glider-prev"
+            style="left: 0; position: static; padding: 15px; color: white"
           >
-            <button class="glide__arrow glide__arrow--left" data-glide-dir="<">
-              <i class="p-2 text-indigo-300 fas fa-chevron-left"></i>
-            </button>
-            <button class="glide__arrow glide__arrow--right" data-glide-dir=">">
-              <i class="p-2 text-indigo-300 fas fa-chevron-right"></i>
-            </button>
-          </div>
+            «
+          </button>
+          <button
+            aria-label="Next"
+            class="glider-next"
+            style="left: 0; position: static; padding: 15px; color: white"
+          >
+            »
+          </button>
         </div>
-
-        <!--ARROWS -->
       </div>
     </section>
 
-    <!--POPULAR ACTORS -->
+    <!--TRENDING NOW-->
     <section>
-      <div class="glide actors flex justify-center mt-2 flex-col items-center">
-        <div
-          class="
-            absolute
-            flex
-            justify-start
-            mt-5
-            inset-0
-            flex-col
-            m-auto
-            w-full
-            lg:w-8/12
-          "
-        >
+      <!--TEXT-->
+      <div
+        class="glide flex flex-none justify-center mt-2 flex-col items-center"
+      >
+        <div class="flex justify-start mt-5 inset-0 m-auto w-full lg:w-8/12">
           <h1
             class="
               absolute
@@ -234,57 +253,37 @@
               font-bold
               text-gray-900
               flex
-              justify-start
-              inset-0
               m-auto
+              items-center
             "
           >
-            <div class="w-1 h-8 bg-pink-500 mr-2 items-center"></div>
+            <div class="w-1 h-12 lg:h-8 bg-pink-500 mr-2 items-center"></div>
             POPULAR ACTORS
           </h1>
         </div>
+      </div>
 
-        <div
-          class="glide__track w-full lg:w-8/12 mt-16 relative"
-          data-glide-el="track"
-        >
-          <div class="glide__slides popularPeople"></div>
-        </div>
+      <!--SLIDES-->
+      <div class="flex flex-col relative justify-center items-center mt-14">
+        <div class="glider w-full lg:w-8/12 flex popularPeople overflow-hidden"></div>
 
-        <!--ARROWS -->
-
-        <div
-          class="
-            glide glide__track
-            w-full
-            lg:w-8/12
-            flex
-            justify-center
-            items-center
-          "
-          data-glide-el="track"
-        >
-          <div
-            class="
-              glide__arrows
-              flex
-              justify-between
-              items-center
-              w-full
-              lg:w-8/12
-            "
-            data-glide-el="controls"
+        <!--BUTTONS-->
+        <div class="absolute flex justify-between w-full lg:w-8/12 mx-auto">
+          <button
+            aria-label="Previous"
+            class="glider-prev"
+            style="left: 0; position: static; padding: 15px; color: white"
           >
-            <button class="glide__arrow glide__arrow--left" data-glide-dir="<">
-              <i class="p-2 text-indigo-300 fas fa-chevron-left"></i>
-            </button>
-            <button class="glide__arrow glide__arrow--right" data-glide-dir=">">
-              <i class="p-2 text-indigo-300 fas fa-chevron-right"></i>
-            </button>
-          </div>
+            «
+          </button>
+          <button
+            aria-label="Next"
+            class="glider-next"
+            style="left: 0; position: static; padding: 15px; color: white"
+          >
+            »
+          </button>
         </div>
-
-        <!--ARROWS -->
       </div>
     </section>
 
@@ -298,13 +297,41 @@
         flex
         justify-center
         flex-col
-        bg-contain bg-center bg-no-repeat bg-fixed
+        bg-cover bg-top bg-no-repeat bg-fixed
         mt-5
-        h-64
+        h-auto
+        pt-2
       "
     >
-      <div class="text-white flex flex-col p-8">
-        <h1 class="text-4xl font-bold drop-shadow-md">Latest trailers</h1>
+      <div class="text-white flex flex-col ml-8 mt-12 mb-4">
+        <h1 class="text-4xl font-bold drop-shadow-md lg:ml-5">
+          Latest trailers
+        </h1>
+      </div>
+
+      <!--SLIDES-->
+      <div class="flex flex-col relative justify-center items-center mb-10">
+        <div
+          class="glider w-full lg:w-11/12 flex trailers overflow-x-hidden"
+        ></div>
+
+        <!--BUTTONS-->
+        <div class="absolute flex justify-between w-full lg:w-11/12 mb-12 z-10">
+          <button
+            aria-label="Previous"
+            class="glider-prev"
+            style="left: 0; position: static; padding: 10px; color: white"
+          >
+            «
+          </button>
+          <button
+            aria-label="Next"
+            class="glider-next z-30"
+            style="left: 0; position: static; padding: 10px; color: white"
+          >
+            »
+          </button>
+        </div>
       </div>
     </section>
 
@@ -340,5 +367,5 @@
     </div>
   </body>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.2.0/glide.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/glider-js@1/glider.min.js"></script>
 </html>

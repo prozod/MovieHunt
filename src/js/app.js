@@ -8,7 +8,6 @@ const paginationContainer = document.querySelector(".paginationBtn");
 const apiKey = "1f4df7f17529b542876a985507f244b0";
 const IMAGE_URL = "https://image.tmdb.org/t/p/w500";
 
-
 // pagination
 // pagination
 // pagination
@@ -38,10 +37,7 @@ async function fetchMovies(searchQuery, page) {
 const createMovieCard = (movies) => {
   const movieCard = ` ${movies
     .map((movie) => {
-      if (
-        movie.release_date !== "" &&
-        movie.vote_average > 0
-      )
+      if (movie.release_date !== "" && movie.vote_average > 0)
         return `
     <div
     class="
@@ -60,7 +56,11 @@ const createMovieCard = (movies) => {
     " data-movie-id="${movie.id}"
   >
     <img
-      src="${!movie.poster_path ? `https://via.placeholder.com/160x240/C7D2FE/000000?text=No+image+available.` : IMAGE_URL+movie.poster_path}"
+      src="${
+        !movie.poster_path
+          ? `https://via.placeholder.com/160x240/C7D2FE/000000?text=No+image+available.`
+          : IMAGE_URL + movie.poster_path
+      }"
       alt=""
       class="w-40 h-auto rounded-md mt-5 md:mt-0"
     />
@@ -93,7 +93,9 @@ const createMovieCard = (movies) => {
       <p class="font-bold text-purple-900 flex items-center">
         Average rating:
         <span class="font-medium text-purple-600">
-        <span class="bg-purple-400 rounded-md px-3 py-1 text-white text-xs ml-1">${movie.vote_average}</span>
+        <span class="bg-purple-400 rounded-md px-3 py-1 text-white text-xs ml-1">${
+          movie.vote_average
+        }</span>
         </span>
       </p>
 
@@ -113,8 +115,6 @@ const createMovieCard = (movies) => {
 };
 
 const createPagination = (pages) => {
-  
-
   paginationContainer.innerHTML = "";
   let maxLeft = Number(state.current_page) - Math.floor(state.pagination / 2);
   let maxRight = Number(state.current_page) + Math.floor(state.pagination / 2);
@@ -148,7 +148,6 @@ const createPagination = (pages) => {
       paginationContainer.innerHTML +
       `<button value=${pages} class="bg-indigo-300 text-purple-900  px-5 py-2 my-2 mx-1 rounded-md font-bold active:bg-indigo-200 focus:outline-none">Last</button>`;
   }
-
 };
 
 searchForm.addEventListener("submit", (e) => {
@@ -172,7 +171,6 @@ searchForm.addEventListener("submit", (e) => {
       return;
     }
 
-
     state.movies = data.results;
     state.total_pages = data.total_pages;
     state.current_page = data.page;
@@ -187,15 +185,14 @@ searchForm.addEventListener("submit", (e) => {
 });
 
 paginationContainer.addEventListener("click", (e) => {
-  e.preventDefault()
+  e.preventDefault();
   let clickedBtn = e.target.closest("button");
 
   if (!clickedBtn) return;
   if (clickedBtn) {
     state.current_page = clickedBtn.value;
-    
+
     fetchMovies(state.query, state.current_page).then((data) => {
-      
       state.movies = data.results;
       state.total_pages = data.total_pages;
 
@@ -204,12 +201,8 @@ paginationContainer.addEventListener("click", (e) => {
 
       createMovieCard(state.movies);
       createPagination(state.total_pages);
-
-      
     });
   }
-
-  
 });
 
 /// POPULAR SHOWS
@@ -228,7 +221,6 @@ async function fetchPopularShows() {
 fetchPopularShows().then((data) => {
   trendingShows(data.results.slice(0, 7));
 });
-
 
 function trendingShows(shows) {
   const show = `${shows
@@ -275,5 +267,3 @@ function trendingShows(shows) {
 
   trendingContainer.insertAdjacentHTML("beforeend", show);
 }
-
-
