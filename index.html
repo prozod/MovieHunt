@@ -16,10 +16,8 @@ content="MovieHunt is a movie search engine. Are you looking for a movie? We got
       rel="stylesheet"
     />
     <link rel="stylesheet" href="/css/style.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/glider-js@1/glider.min.css"
-    />
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.css" />
+<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
     <link
       rel="stylesheet"
       href="https://use.fontawesome.com/releases/v5.15.3/css/all.css"
@@ -178,7 +176,7 @@ content="MovieHunt is a movie search engine. Are you looking for a movie? We got
       <div
         class="glide flex flex-none justify-center mt-2 flex-col items-center "
       >
-        <div class="flex justify-start mt-5 inset-0 m-auto w-full lg:w-8/12">
+        <div class="flex justify-start mt-5 inset-0 m-auto w-full lg:w-8/12 z-30">
           <h1
             class="
               absolute
@@ -214,36 +212,25 @@ content="MovieHunt is a movie search engine. Are you looking for a movie? We got
       </div>
 
       <!--SLIDES-->
-      <div class="flex flex-col relative justify-center items-center mt-14 ">
-        <div class="glider w-full lg:w-8/12 flex trendingNow overflow-hidden"></div>
+      <div class="swiper-container swiper1 w-full lg:w-8/12 ">
+        <div class="swiper-wrapper mt-16 trendingNow">
+          
+        </div>
 
         <!--BUTTONS-->
-        <div class="absolute flex justify-between w-full lg:w-8/12 mx-auto">
-          <button
-            aria-label="Previous"
-            class="glider-prev"
-            style="left: 0; position: static; padding: 15px; color: white"
-          >
-            «
-          </button>
-          <button
-            aria-label="Next"
-            class="glider-next"
-            style="left: 0; position: static; padding: 15px; color: white"
-          >
-            »
-          </button>
-        </div>
+        
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
       </div>
     </section>
 
-    <!--TRENDING NOW-->
+    <!--POPULAR ACTORS-->
     <section>
       <!--TEXT-->
       <div
         class="glide flex flex-none justify-center mt-2 flex-col items-center"
       >
-        <div class="flex justify-start mt-5 inset-0 m-auto w-full lg:w-8/12">
+        <div class="flex justify-start mt-5 inset-0 m-auto w-full lg:w-8/12 z-30">
           <h1
             class="
               absolute
@@ -264,26 +251,12 @@ content="MovieHunt is a movie search engine. Are you looking for a movie? We got
       </div>
 
       <!--SLIDES-->
-      <div class="flex flex-col relative justify-center items-center mt-14">
-        <div class="glider w-full lg:w-8/12 flex popularPeople overflow-hidden"></div>
+      <div class="swiper-container swiper2 w-full lg:w-8/12">
+        <div class="swiper-wrapper w-full lg:w-8/12 flex popularPeople  mt-16"></div>
 
         <!--BUTTONS-->
-        <div class="absolute flex justify-between w-full lg:w-8/12 mx-auto">
-          <button
-            aria-label="Previous"
-            class="glider-prev"
-            style="left: 0; position: static; padding: 15px; color: white"
-          >
-            «
-          </button>
-          <button
-            aria-label="Next"
-            class="glider-next"
-            style="left: 0; position: static; padding: 15px; color: white"
-          >
-            »
-          </button>
-        </div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
       </div>
     </section>
 
@@ -310,28 +283,12 @@ content="MovieHunt is a movie search engine. Are you looking for a movie? We got
       </div>
 
       <!--SLIDES-->
-      <div class="flex flex-col relative justify-center items-center mb-10">
-        <div
-          class="glider w-full lg:w-11/12 flex trailers overflow-x-hidden"
-        ></div>
+      <div class="swiper-container swiper3 flex justify-center w-11/12 items-center mb-10">
+        <div class="swiper-wrapper  trailers  w-full"></div>
 
         <!--BUTTONS-->
-        <div class="absolute flex justify-between w-full lg:w-11/12 mb-12 z-10">
-          <button
-            aria-label="Previous"
-            class="glider-prev"
-            style="left: 0; position: static; padding: 10px; color: white"
-          >
-            «
-          </button>
-          <button
-            aria-label="Next"
-            class="glider-next z-30"
-            style="left: 0; position: static; padding: 10px; color: white"
-          >
-            »
-          </button>
-        </div>
+        <div class="swiper-button-prev "></div>
+        <div class="swiper-button-next "></div>
       </div>
     </section>
 
@@ -367,5 +324,6 @@ content="MovieHunt is a movie search engine. Are you looking for a movie? We got
     </div>
   </body>
 
-  <script src="https://cdn.jsdelivr.net/npm/glider-js@1/glider.min.js"></script>
+  <script src="https://unpkg.com/swiper/swiper-bundle.js"></script>
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 </html>
