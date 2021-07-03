@@ -3,18 +3,8 @@ const app = express();
 const path = require("path");
 const port = 3000;
 
-app.use("/js", express.static(path.join(__dirname, "src", "js")));
-app.use("/css", express.static(path.join(__dirname, "src", "css")));
-app.use(
-  "/css",
-  express.static(
-    path.join(__dirname, "node_modules/@glidejs/glide/dist", "css")
-  )
-);
-app.use(
-  "/dist",
-  express.static(path.join(__dirname, "node_modules/plyr", "dist"))
-);
+// app.use("/js", express.static(path.join(__dirname, "src", "js")));
+app.use(express.static(path.join(__dirname + "/")));
 
 app.use("/images", express.static(path.join(__dirname, "images")));
 
