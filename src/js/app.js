@@ -8,6 +8,13 @@ const paginationContainer = document.querySelector(".paginationBtn");
 const apiKey = "1f4df7f17529b542876a985507f244b0";
 const IMAGE_URL = "https://image.tmdb.org/t/p/w500";
 
+// movie details on click
+document.addEventListener("click", (e) => {
+  if (!e.target.classList.contains("movieTitle")) return;
+
+  console.log(e.target.dataset.movieId);
+});
+
 // pagination
 // pagination
 // pagination
@@ -67,13 +74,17 @@ const createMovieCard = (movies) => {
     <div class="movie__info flex flex-col h-auto m-5">
       <h2
         class="
+        movieTitle
           text-purple-900
           font-black font-inter
           text-xl
           mb-2
           hover:text-purple-700
           cursor-pointer
+          
         "
+     data-movie-id="${movie.id}"
+
       >
        ${movie.title} (${movie.release_date.slice(0, -6)})
       </h2>

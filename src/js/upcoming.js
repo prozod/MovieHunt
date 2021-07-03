@@ -16,7 +16,6 @@ async function fetchUpcomingMoviesPage() {
 }
 
 fetchUpcomingMoviesPage().then((data) => {
-  console.log(data);
   upcomingMovies(data.results);
 });
 
@@ -28,7 +27,17 @@ document.addEventListener("click", (e) => {
     `https://api.themoviedb.org/3/movie/${movieId}/similar?api_key=${apiKey}&language=en-US&page=1`
   )
     .then((response) => response.json())
-    .then((data) => similarMovies(data.results.slice(-10)));
+    .then((data) => {
+      if (data.results.length === 0)
+        throw new Error(
+          "We were unable to get any data for that specific movie. Try again."
+        );
+      similarMovies(data.results.slice(-10));
+    })
+    .catch(
+      (err) =>
+        (document.querySelector(".similarRecommends").innerHTML = err.message)
+    );
 
   document.querySelector(".similarRecommends").innerHTML = "";
 
@@ -40,9 +49,9 @@ document.addEventListener("click", (e) => {
 
   const similarTo = function () {
     return `
-    <div class="similarTitle flex items-center mb-2">
-          <div class="w-1 h-8 bg-indigo-600 mr-2 items-center"></div>
-          <h3 class="text-xl text-gray-900 font-bold">Movies similar to <span class="text-purple-800"> ${
+    <div class="similarTitle flex items-center mb-2 relative flex-none">
+          <div class="w-1 absolute h-full bg-purple-600 mr-2 items-center"></div>
+          <h3 class="text-xl text-gray-900 font-bold ml-3">Movies similar to <span class="text-purple-800"> ${
             e.target.querySelector(".movieTitle").textContent
           }</span></h3>
         </div>
@@ -66,16 +75,27 @@ document.addEventListener("click", (e) => {
     : "";
 });
 
+document.querySelector(".backbtn").addEventListener("click", (e) => {
+  document.querySelector(".similarTitle").remove();
+  document.body.style.overflow = "visible";
+  upcomingContainer.style.pointerEvents = "auto";
+  similarModal.classList.contains("flex")
+    ? similarModal.classList.replace("flex", "hidden")
+    : "";
+});
+
 const similarMovies = function (movies) {
   const movie = movies
     .map((movie) => {
       return `
-      <div class="bg-purple-300 bg-opacity-80 h-auto flex rounded-md w-72 ">
+      <div class="bg-purple-300 bg-opacity-80 h-auto flex rounded-md w-full md:w-72 ">
       <div>
-      <img src="${IMAGE_URL}${movie.poster_path}" class="w-24 max-w-sm h-32" />
+      <img src="${IMAGE_URL}${
+        movie.poster_path
+      }" class="w-20 h-28 md:w-24 md:h-32" />
       </div>
       <div class="p-2 ml-1">
-      <h1 class=" text-indigo-900 font-bold">${movie.title}</h1>
+      <h1 class=" text-indigo-900 font-bold mb-2">${movie.title}</h1>
       <h1 class="text-xs text-indigo-900 font-medium"><span class="font-bold">Year:</span> ${movie.release_date.slice(
         0,
         -6
@@ -85,6 +105,7 @@ const similarMovies = function (movies) {
       }/10</h1>
       </div>
     </div>
+    
     `;
     })
     .join("");

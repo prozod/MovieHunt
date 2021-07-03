@@ -212,6 +212,7 @@
         h-screen
         justify-center
         items-center
+        overflow-y-auto
         text-white
       "
       id="similarMoviesModal"
@@ -222,10 +223,11 @@
           p-5
           bg-purple-200
           w-auto
-          h-auto
-          rounded-md
+          h-full
+          md:h-auto md:rounded-md
           flex flex-col
           z-50
+          overflow-y-auto
         "
       >
         <!-- <div class="flex items-center mb-2">
@@ -233,13 +235,25 @@
           <h3 class="text-xl text-gray-900 font-bold">Similar movies</h3>
         </div> -->
         <div
-          class="similarRecommends grid grid-rows-auto grid-cols-2 mt-2 gap-4"
+          class="
+            similarRecommends
+            grid grid-rows-autogrid-cols-1
+            md:grid-cols-2
+            mt-2
+            gap-4
+            text-gray-900
+          "
         >
           <!-- <div class="bg-purple-300 h-auto flex rounded-sm w-72">
             <img src="images/greyanatmoy.jpg" class="w-16" />
             <h1 class="p-2 text-indigo-900 font-bold">Grey Anatomy (2021)</h1>
           </div> -->
         </div>
+        <button
+          class="backbtn bg-purple-300 font-bold text-md p-5 mt-5 text-gray-900"
+        >
+          Go back
+        </button>
       </div>
     </div>
 
