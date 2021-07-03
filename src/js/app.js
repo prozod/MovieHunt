@@ -5,19 +5,114 @@ const searchInput = document.querySelector(".searchbox");
 const browsedContainer = document.querySelector(".browsingList");
 const trendingContainer = document.getElementById("trending");
 const paginationContainer = document.querySelector(".paginationBtn");
-const apiKey = "1f4df7f17529b542876a985507f244b0";
 const IMAGE_URL = "https://image.tmdb.org/t/p/w500";
+import {
+  getMovieCast,
+  getMovieInfo,
+  getMovieTrailer,
+  fetchMovies,
+  fetchPopularShows,
+} from "./fetchDetails.js";
 
-// movie details on click
+// MOVIE MODAL
+// MOVIE MODAL
+// MOVIE MODAL
+
 document.addEventListener("click", (e) => {
   if (!e.target.classList.contains("movieTitle")) return;
+  backdropMovieInfo.innerHTML = "";
+  getMovieTrailer(e.target.dataset?.movieId)
+    .then((res) => {
+      if (!res.results || !res.results[0])
+        throw new Error(
+          "We were unable to get any data for that specific movie. Try again."
+        );
+      getMovieInfo(res.id).then((data) => {
+        getMovieCast(res.id).then((cast) => {
+          const castcrew = cast.cast.map((actor) => actor.name);
+          buildModal(res.results[0].key, data, castcrew.slice(0, 10));
+        });
+      });
+    })
+    .catch((err) => {
+      backdropMovieInfo.innerHTML = `<p class="flex justify-center items-center text-white m-auto p-4 font-bold text-xl">${err.message}</p>`;
+    });
 
-  console.log(e.target.dataset.movieId);
+  modalMovieInfo.classList.contains("hidden")
+    ? modalMovieInfo.classList.replace("hidden", "flex")
+    : "";
+  document.body.style.overflow = "hidden";
 });
 
-// pagination
-// pagination
-// pagination
+const buildModal = (video, info, cast) => {
+  const html = `
+   <div class="bg-gray-900 flex justify-center items-center w-full h-screen md:h-auto md:w-3/4 lg:w-1/3 xl:w-1/3 m-auto rounded-b-md overflow-y-auto">
+  <div class="flex justify-center flex-col w-full" >
+    <iframe loading="lazy" class="w-full h-80" src="https://www.youtube.com/embed/${video}" title="YouTube video player" frameborder="0"  allowfullscreen></iframe>
+
+    <div class="my-2 pl-4 flex flex-col md:flex-row pb-5">
+    <div class="flex flex-col justify-center w-full md:w-3/4 ">
+      <div class="flex items-center mb-5 relative flex-none">
+      <div class="absolute w-1 h-full bg-purple-500 mr-2 mt-2"></div>
+      <p class="font-bold text-3xl text-white pt-2 ml-4">${info.title}</p>
+     
+    </div>
+    <p class=" text-sm text-white text-opacity-80 w-full line-clamp-6 pr-2">${
+      info.overview
+    }</p>
+    </div>
+
+    <div class="flex flex-col md:px-2 pt-3 w-full md:w-2/4 mr-4 ">
+    <p class="text-sm text-white text-opacity-80"><span class="font-bold text-purple-400">Genre: </span>${info.genres
+      .map((genre) => genre.name)
+      .join(", ")}</p>
+    <p class=" text-sm text-white text-opacity-80"><span class="font-bold text-purple-400">Rating: </span> ${
+      info.vote_average
+    }/10</p>
+    <p class=" text-sm text-white mb-5 text-opacity-80"><span class="font-bold text-purple-400">Runtime: </span> ${
+      info.runtime
+    } minutes</p>
+    <p class=" text-sm text-white pt-1 text-opacity-80"><span class="font-bold text-md text-purple-400">Cast:</span> ${cast.join(
+      ", "
+    )}</p>
+  </div>
+    
+    
+  </div>
+    
+  <button class="backbtn bg-gray-800 py-2 text-white ">GO BACK</button>
+  </div>
+</div>
+  `;
+  backdropMovieInfo.insertAdjacentHTML("beforeend", html);
+};
+
+// CLOSE MOVIE MODAL ON BTN CLICK
+
+document.addEventListener("click", (e) => {
+  if (!e.target.classList.contains("backbtn")) return;
+
+  modalMovieInfo.classList.contains("flex")
+    ? modalMovieInfo.classList.replace("flex", "hidden")
+    : "";
+
+  document.body.style.overflow = "visible";
+});
+
+// CLOSE MOVIE MODAL WHEN CLICKING OUTSIDE
+
+document.addEventListener("click", (e) => {
+  if (e.target.id !== "backdropMovieInfo") return;
+  modalMovieInfo.classList.contains("flex")
+    ? modalMovieInfo.classList.replace("flex", "hidden")
+    : "";
+
+  document.body.style.overflow = "visible";
+});
+
+// MOVIE QUERY + PAGINATION
+// MOVIE QUERY + PAGINATION
+// MOVIE QUERY + PAGINATION
 
 let state = {
   total_rows: 5,
@@ -27,19 +122,6 @@ let state = {
   query: "",
   pagination: 5,
 };
-
-// movie querying
-// movie querying
-// movie querying
-
-async function fetchMovies(searchQuery, page) {
-  let response = await fetch(
-    `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&language=en-US&query=${searchQuery}&page=${page}`
-  );
-  let data = await response.json();
-
-  return data;
-}
 
 const createMovieCard = (movies) => {
   const movieCard = ` ${movies
@@ -54,7 +136,7 @@ const createMovieCard = (movies) => {
       max-w-5xl
       h-auto
       bg-purple-400 bg-opacity-20
-      z-50
+      z-20
       flex
       items-center
       flex-col
@@ -219,15 +301,6 @@ paginationContainer.addEventListener("click", (e) => {
 /// POPULAR SHOWS
 /// POPULAR SHOWS
 /// POPULAR SHOWS
-
-async function fetchPopularShows() {
-  let response = await fetch(
-    `https://api.themoviedb.org/3/tv/popular?api_key=${apiKey}&language=en-US&page=1`
-  );
-
-  let data = await response.json();
-  return data;
-}
 
 fetchPopularShows().then((data) => {
   trendingShows(data.results.slice(0, 7));

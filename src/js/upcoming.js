@@ -4,20 +4,15 @@ const apiKey = "1f4df7f17529b542876a985507f244b0";
 const IMAGE_URL = "https://image.tmdb.org/t/p/w500";
 const upcomingContainer = document.querySelector(".upcomingContainer");
 const similarModal = document.getElementById("similarMoviesModal");
-///UPCOMING MOVIES
+import { fetchUpcomingMoviesPage, getMovieInfo } from "./fetchDetails.js";
 
-async function fetchUpcomingMoviesPage() {
-  let response = await fetch(
-    `https://api.themoviedb.org/3/movie/upcoming?api_key=${apiKey}&language=en-US&page=1`
-  );
-  let data = await response.json();
-
-  return data;
-}
+// UPCOMING MOVIES
 
 fetchUpcomingMoviesPage().then((data) => {
   upcomingMovies(data.results);
 });
+
+// FETCH SIMILAR MOVIES WHEN CLICK ON THE CARD
 
 document.addEventListener("click", (e) => {
   const movieId = e.target.dataset.id;
@@ -139,8 +134,8 @@ const upcomingMovies = function (movies) {
         transform
         hover:scale-105
         hover:z-40
-  
-
+        sm:mt-4
+        lg:mt-0
         duration-200
       "
       data-id="${movie.id}"

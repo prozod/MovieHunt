@@ -1,28 +1,16 @@
-import {movieId} from "./genres.js"
-const apiKey = "1f4df7f17529b542876a985507f244b0";
+import { movieId } from "./genres.js";
+import { fetchTrends } from "./fetchDetails.js";
+
 const IMAGE_URL = "https://image.tmdb.org/t/p/w500";
 const popularContainer = document.querySelector(".popularContainer");
+
 /// POPULAR MOVIES
 
-async function fetchPopularMoviesPage() {
-  let fetchedMovies = [];
-  let fetchedPages = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-
-  let response = await fetch(
-    `https://api.themoviedb.org/3/trending/all/week?api_key=${apiKey}&language=en-US&page=1`
-  );
-  let data = await response.json();
-
-  return data;
-}
-
-fetchPopularMoviesPage().then((data) => {
-  console.log(data);
+fetchTrends().then((data) => {
   popularMovies(data.results);
 });
 
 const popularMovies = function (movies) {
-  console.log(movies);
   const movie = movies
     .map((movie) => {
       if (
