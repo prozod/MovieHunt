@@ -1,31 +1,31 @@
 {
-  "name": "moviehunt",
-  "version": "1.0.0",
-  "main": "./src/index.html",
-  "scripts": {
-    "start": "snowpack dev",
-    "build": "snowpack build",
-    "build:css": "postcss src/css/tailwind.css -o src/css/style.css"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "@snowpack/plugin-dotenv": "^2.1.0",
-    "@snowpack/plugin-postcss": "^1.2.2",
-    "autoprefixer": "^10.2.5",
-    "postcss": "^8.2.14",
-    "tailwindcss": "^2.1.2",
-    "tailwindcss-pseudo-elements": "^2.0.0"
-  },
-  "dependencies": {
-    "@glidejs/glide": "^3.4.1",
-    "@tailwindcss/aspect-ratio": "^0.2.1",
-    "@tailwindcss/line-clamp": "^0.2.1",
-    "express": "^4.17.1",
-    "material-design-icons": "^3.0.1",
-    "postcss-cli": "^8.3.1",
-    "snowpack": "^3.4.0"
-  },
-  "description": ""
+	"name": "moviehunt",
+	"version": "1.0.0",
+	"main": "./src/index.html",
+	"scripts": {
+		"start": "snowpack dev",
+		"build": "snowpack build",
+		"build:css": "postcss src/css/tailwind.css -o src/css/style.css"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"devDependencies": {
+		"@snowpack/plugin-dotenv": "^2.1.0",
+		"@snowpack/plugin-postcss": "^1.2.2",
+		"autoprefixer": "^10.3.6",
+		"postcss": "^8.3.8",
+		"tailwindcss": "^2.2.16",
+		"tailwindcss-pseudo-elements": "^2.0.0"
+	},
+	"dependencies": {
+		"@glidejs/glide": "^3.4.1",
+		"@tailwindcss/aspect-ratio": "^0.2.1",
+		"@tailwindcss/line-clamp": "^0.2.1",
+		"express": "^4.17.1",
+		"material-design-icons": "^3.0.1",
+		"postcss-cli": "^8.3.1",
+		"snowpack": "^3.4.0"
+	},
+	"description": ""
 }

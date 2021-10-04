@@ -7,45 +7,45 @@ const trendingContainer = document.getElementById("trending");
 const paginationContainer = document.querySelector(".paginationBtn");
 const IMAGE_URL = "https://image.tmdb.org/t/p/w500";
 import {
-  getMovieCast,
-  getMovieInfo,
-  getMovieTrailer,
-  fetchMovies,
-  fetchPopularShows,
+	getMovieCast,
+	getMovieInfo,
+	getMovieTrailer,
+	fetchMovies,
+	fetchPopularShows
 } from "./fetchDetails.js";
 
 // MOVIE MODAL
 // MOVIE MODAL
 // MOVIE MODAL
 
-document.addEventListener("click", (e) => {
-  if (!e.target.classList.contains("movieTitle")) return;
-  backdropMovieInfo.innerHTML = "";
-  getMovieTrailer(e.target.dataset?.movieId)
-    .then((res) => {
-      if (!res.results || !res.results[0])
-        throw new Error(
-          "We were unable to get any data for that specific movie. Try again."
-        );
-      getMovieInfo(res.id).then((data) => {
-        getMovieCast(res.id).then((cast) => {
-          const castcrew = cast.cast.map((actor) => actor.name);
-          buildModal(res.results[0].key, data, castcrew.slice(0, 10));
-        });
-      });
-    })
-    .catch((err) => {
-      backdropMovieInfo.innerHTML = `<p class="flex justify-center items-center text-white m-auto p-4 font-bold text-xl">${err.message}</p>`;
-    });
+document.addEventListener("click", e => {
+	if (!e.target.classList.contains("movieTitle")) return;
+	backdropMovieInfo.innerHTML = "";
+	getMovieTrailer(e.target.dataset?.movieId)
+		.then(res => {
+			if (!res.results || !res.results[0])
+				throw new Error(
+					"We were unable to get any data for that specific movie. Try again."
+				);
+			getMovieInfo(res.id).then(data => {
+				getMovieCast(res.id).then(cast => {
+					const castcrew = cast.cast.map(actor => actor.name);
+					buildModal(res.results[0].key, data, castcrew.slice(0, 10));
+				});
+			});
+		})
+		.catch(err => {
+			backdropMovieInfo.innerHTML = `<p class="flex justify-center items-center text-white m-auto p-4 font-bold text-xl">${err.message}</p>`;
+		});
 
-  modalMovieInfo.classList.contains("hidden")
-    ? modalMovieInfo.classList.replace("hidden", "flex")
-    : "";
-  document.body.style.overflow = "hidden";
+	modalMovieInfo.classList.contains("hidden")
+		? modalMovieInfo.classList.replace("hidden", "flex")
+		: "";
+	document.body.style.overflow = "hidden";
 });
 
 const buildModal = (video, info, cast) => {
-  const html = `
+	const html = `
    <div class="bg-gray-900 flex justify-center items-center w-full h-screen md:h-auto md:w-3/4 lg:w-1/3 xl:w-1/3 m-auto rounded-b-md overflow-y-auto">
   <div class="flex justify-center flex-col w-full" >
     <iframe loading="lazy" class="w-full h-80" src="https://www.youtube.com/embed/${video}" title="YouTube video player" frameborder="0"  allowfullscreen></iframe>
@@ -58,23 +58,23 @@ const buildModal = (video, info, cast) => {
      
     </div>
     <p class=" text-sm text-white text-opacity-80 w-full line-clamp-6 pr-2">${
-      info.overview
-    }</p>
+			info.overview
+		}</p>
     </div>
 
     <div class="flex flex-col md:px-2 pt-3 w-full md:w-2/4 mr-4 ">
     <p class="text-sm text-white text-opacity-80"><span class="font-bold text-purple-400">Genre: </span>${info.genres
-      .map((genre) => genre.name)
-      .join(", ")}</p>
+			.map(genre => genre.name)
+			.join(", ")}</p>
     <p class=" text-sm text-white text-opacity-80"><span class="font-bold text-purple-400">Rating: </span> ${
-      info.vote_average
-    }/10</p>
+			info.vote_average
+		}/10</p>
     <p class=" text-sm text-white mb-5 text-opacity-80"><span class="font-bold text-purple-400">Runtime: </span> ${
-      info.runtime
-    } minutes</p>
+			info.runtime
+		} minutes</p>
     <p class=" text-sm text-white pt-1 text-opacity-80"><span class="font-bold text-md text-purple-400">Cast:</span> ${cast.join(
-      ", "
-    )}</p>
+			", "
+		)}</p>
   </div>
     
     
@@ -84,30 +84,30 @@ const buildModal = (video, info, cast) => {
   </div>
 </div>
   `;
-  backdropMovieInfo.insertAdjacentHTML("beforeend", html);
+	backdropMovieInfo.insertAdjacentHTML("beforeend", html);
 };
 
 // CLOSE MOVIE MODAL ON BTN CLICK
 
-document.addEventListener("click", (e) => {
-  if (!e.target.classList.contains("backbtn")) return;
+document.addEventListener("click", e => {
+	if (!e.target.classList.contains("backbtn")) return;
 
-  modalMovieInfo.classList.contains("flex")
-    ? modalMovieInfo.classList.replace("flex", "hidden")
-    : "";
+	modalMovieInfo.classList.contains("flex")
+		? modalMovieInfo.classList.replace("flex", "hidden")
+		: "";
 
-  document.body.style.overflow = "visible";
+	document.body.style.overflow = "visible";
 });
 
 // CLOSE MOVIE MODAL WHEN CLICKING OUTSIDE
 
-document.addEventListener("click", (e) => {
-  if (e.target.id !== "backdropMovieInfo") return;
-  modalMovieInfo.classList.contains("flex")
-    ? modalMovieInfo.classList.replace("flex", "hidden")
-    : "";
+document.addEventListener("click", e => {
+	if (e.target.id !== "backdropMovieInfo") return;
+	modalMovieInfo.classList.contains("flex")
+		? modalMovieInfo.classList.replace("flex", "hidden")
+		: "";
 
-  document.body.style.overflow = "visible";
+	document.body.style.overflow = "visible";
 });
 
 // MOVIE QUERY + PAGINATION
@@ -115,19 +115,19 @@ document.addEventListener("click", (e) => {
 // MOVIE QUERY + PAGINATION
 
 let state = {
-  total_rows: 5,
-  total_pages: null,
-  current_page: 1,
-  movies: [],
-  query: "",
-  pagination: 5,
+	total_rows: 5,
+	total_pages: null,
+	current_page: 1,
+	movies: [],
+	query: "",
+	pagination: 5
 };
 
-const createMovieCard = (movies) => {
-  const movieCard = ` ${movies
-    .map((movie) => {
-      if (movie.release_date !== "" && movie.vote_average > 0)
-        return `
+const createMovieCard = movies => {
+	const movieCard = ` ${movies
+		.map(movie => {
+			if (movie.release_date !== "" && movie.vote_average > 0)
+				return `
     <div
     class="
       rounded-md
@@ -146,10 +146,10 @@ const createMovieCard = (movies) => {
   >
     <img
       src="${
-        !movie.poster_path
-          ? `https://via.placeholder.com/160x240/C7D2FE/000000?text=No+image+available.`
-          : IMAGE_URL + movie.poster_path
-      }"
+				!movie.poster_path
+					? `https://via.placeholder.com/160x240/C7D2FE/000000?text=No+image+available.`
+					: IMAGE_URL + movie.poster_path
+			}"
       alt=""
       class="w-40 h-auto rounded-md mt-5 md:mt-0"
     />
@@ -173,8 +173,8 @@ const createMovieCard = (movies) => {
       <p class="font-bold text-purple-900">
         Release date:
         <span class="font-medium text-purple-600">${
-          movie.release_date
-        } (US)</span>
+					movie.release_date
+				} (US)</span>
       </p>
       <p class="font-bold text-purple-900">
         Genre: 
@@ -187,8 +187,8 @@ const createMovieCard = (movies) => {
         Average rating:
         <span class="font-medium text-purple-600">
         <span class="bg-purple-400 rounded-md px-3 py-1 text-white text-xs ml-1">${
-          movie.vote_average
-        }</span>
+					movie.vote_average
+				}</span>
         </span>
       </p>
 
@@ -199,120 +199,120 @@ const createMovieCard = (movies) => {
       </p>
     </div>
   </div>`;
-    })
-    .join("")}
+		})
+		.join("")}
   
   `;
 
-  browsedContainer.insertAdjacentHTML("beforeend", movieCard);
+	browsedContainer.insertAdjacentHTML("beforeend", movieCard);
 };
 
-const createPagination = (pages) => {
-  paginationContainer.innerHTML = "";
-  let maxLeft = Number(state.current_page) - Math.floor(state.pagination / 2);
-  let maxRight = Number(state.current_page) + Math.floor(state.pagination / 2);
+const createPagination = pages => {
+	paginationContainer.innerHTML = "";
+	let maxLeft = Number(state.current_page) - Math.floor(state.pagination / 2);
+	let maxRight = Number(state.current_page) + Math.floor(state.pagination / 2);
 
-  if (maxLeft < 1) {
-    maxLeft = 1;
-    maxRight = state.pagination;
-  }
+	if (maxLeft < 1) {
+		maxLeft = 1;
+		maxRight = state.pagination;
+	}
 
-  if (maxRight > pages) {
-    maxLeft = pages - (state.pagination - 1);
-    maxRight = pages;
+	if (maxRight > pages) {
+		maxLeft = pages - (state.pagination - 1);
+		maxRight = pages;
 
-    if (maxLeft < 1) {
-      maxLeft = 1;
-    }
-  }
+		if (maxLeft < 1) {
+			maxLeft = 1;
+		}
+	}
 
-  for (let page = maxLeft; page <= maxRight; page++) {
-    paginationContainer.innerHTML += `<button value=${page} class="mx-2 p-2 px-4 my-2  text-purple-900  bg-indigo-300 rounded-md font-bold active:bg-indigo-200 focus:outline-none"> ${page}</button>`;
-  }
+	for (let page = maxLeft; page <= maxRight; page++) {
+		paginationContainer.innerHTML += `<button value=${page} class="mx-2 p-2 px-4 my-2  text-purple-900  bg-indigo-300 rounded-md font-bold active:bg-indigo-200 focus:outline-none"> ${page}</button>`;
+	}
 
-  if (state.current_page != 1) {
-    paginationContainer.innerHTML =
-      `<button value=${1} class="bg-indigo-300 text-purple-900   px-5 py-2 my-2 mx-1 rounded-md font-bold active:bg-indigo-200 focus:outline-none">First</button>` +
-      paginationContainer.innerHTML;
-  }
+	if (state.current_page != 1) {
+		paginationContainer.innerHTML =
+			`<button value=${1} class="bg-indigo-300 text-purple-900   px-5 py-2 my-2 mx-1 rounded-md font-bold active:bg-indigo-200 focus:outline-none">First</button>` +
+			paginationContainer.innerHTML;
+	}
 
-  if (state.current_page != pages) {
-    paginationContainer.innerHTML =
-      paginationContainer.innerHTML +
-      `<button value=${pages} class="bg-indigo-300 text-purple-900  px-5 py-2 my-2 mx-1 rounded-md font-bold active:bg-indigo-200 focus:outline-none">Last</button>`;
-  }
+	if (state.current_page != pages) {
+		paginationContainer.innerHTML =
+			paginationContainer.innerHTML +
+			`<button value=${pages} class="bg-indigo-300 text-purple-900  px-5 py-2 my-2 mx-1 rounded-md font-bold active:bg-indigo-200 focus:outline-none">Last</button>`;
+	}
 };
 
-searchForm.addEventListener("submit", (e) => {
-  e.preventDefault();
-  let searchQuery = searchInput.value;
+searchForm.addEventListener("submit", e => {
+	e.preventDefault();
+	let searchQuery = searchInput.value;
 
-  if (searchQuery === "") {
-    browsedContainer.innerHTML = "";
-    paginationContainer.innerHTML = "";
-    paginationContainer.innerHTML = `<h1 class="text-purple-900 font-bold text-xl">Search field is empty. Please type a movie name.</h1> 
+	if (searchQuery === "") {
+		browsedContainer.innerHTML = "";
+		paginationContainer.innerHTML = "";
+		paginationContainer.innerHTML = `<h1 class="text-purple-900 font-bold text-xl">Search field is empty. Please type a movie name.</h1> 
     `;
-    return;
-  }
+		return;
+	}
 
-  fetchMovies(searchQuery, 1).then((data) => {
-    if (data.results.length === 0) {
-      browsedContainer.innerHTML = "";
-      paginationContainer.innerHTML = "";
-      paginationContainer.innerHTML = `<h1 class="text-purple-900 font-bold text-xl">Could not find any movie called "${searchQuery}".</h1> 
+	fetchMovies(searchQuery, 1).then(data => {
+		if (data.results.length === 0) {
+			browsedContainer.innerHTML = "";
+			paginationContainer.innerHTML = "";
+			paginationContainer.innerHTML = `<h1 class="text-purple-900 font-bold text-xl">Could not find any movie called "${searchQuery}".</h1> 
       `;
-      return;
-    }
+			return;
+		}
 
-    state.movies = data.results;
-    state.total_pages = data.total_pages;
-    state.current_page = data.page;
-    state.query = searchQuery;
+		state.movies = data.results;
+		state.total_pages = data.total_pages;
+		state.current_page = data.page;
+		state.query = searchQuery;
 
-    browsedContainer.innerHTML = "";
-    paginationContainer.innerHTML = "";
+		browsedContainer.innerHTML = "";
+		paginationContainer.innerHTML = "";
 
-    createMovieCard(state.movies);
-    createPagination(state.total_pages);
-  });
+		createMovieCard(state.movies);
+		createPagination(state.total_pages);
+	});
 });
 
-paginationContainer.addEventListener("click", (e) => {
-  e.preventDefault();
-  let clickedBtn = e.target.closest("button");
+paginationContainer.addEventListener("click", e => {
+	e.preventDefault();
+	let clickedBtn = e.target.closest("button");
 
-  if (!clickedBtn) return;
-  if (clickedBtn) {
-    state.current_page = clickedBtn.value;
+	if (!clickedBtn) return;
+	if (clickedBtn) {
+		state.current_page = clickedBtn.value;
 
-    fetchMovies(state.query, state.current_page).then((data) => {
-      state.movies = data.results;
-      state.total_pages = data.total_pages;
+		fetchMovies(state.query, state.current_page).then(data => {
+			state.movies = data.results;
+			state.total_pages = data.total_pages;
 
-      browsedContainer.innerHTML = "";
-      paginationContainer.innerHTML = "";
+			browsedContainer.innerHTML = "";
+			paginationContainer.innerHTML = "";
 
-      createMovieCard(state.movies);
-      createPagination(state.total_pages);
-    });
-  }
+			createMovieCard(state.movies);
+			createPagination(state.total_pages);
+		});
+	}
 });
 
 /// POPULAR SHOWS
 /// POPULAR SHOWS
 /// POPULAR SHOWS
 
-fetchPopularShows().then((data) => {
-  trendingShows(data.results.slice(0, 7));
+fetchPopularShows().then(data => {
+	trendingShows(data.results.slice(0, 7));
 });
 
 function trendingShows(shows) {
-  const show = `${shows
-    .map((show) => {
-      return `
+	const show = `${shows
+		.map(show => {
+			return `
     <div class="my-1 bg-indigo-200 flex font-inter rounded-md" data-id="${
-      show.id
-    }" >
+			show.id
+		}" >
             <img
               src="${IMAGE_URL}${show.poster_path}"
               alt=""
@@ -333,21 +333,21 @@ function trendingShows(shows) {
               <p class="text-xs font-bold text-purple-900">
                 Genre:
                 <span class="font-medium text-purple-600">${showId(
-                  show.genre_ids
-                )}</span>
+									show.genre_ids
+								)}</span>
               </p>
               <p class="text-xs font-bold text-purple-900">
                 Rating:
                 <span class="font-medium text-purple-600"> ${
-                  show.vote_average
-                }/10</span>
+									show.vote_average
+								}/10</span>
               </p>
               
             </div>
           </div>
     `;
-    })
-    .join("")}`;
+		})
+		.join("")}`;
 
-  trendingContainer.insertAdjacentHTML("beforeend", show);
+	trendingContainer.insertAdjacentHTML("beforeend", show);
 }
