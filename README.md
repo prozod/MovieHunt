@@ -1,4 +1,5 @@
 # MovieHunt - Movie Search Engine
+![moviehunt-screenshot](https://res.cloudinary.com/andreastx/image/upload/v1637962395/moviehunt_a74816f4a8.png)
 
 Are you a cinephile? Then this is for you!<br/>Browse through numerous trending movies & TV Series.   
 This page also gives you the ability to search for movies, look at their trailers, check their rating and plot.  
@@ -19,3 +20,5 @@ I got you! Go to the upcoming page and see similar recommendations.
 The live demo is deployed on **Netlify**.
 
 Got any feedback? Feel free to message me!
+
+
